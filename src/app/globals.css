@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fefcf5;
   --foreground: #171717;
+
+  /* card */
+  --card-background: #e6e6e6;
+  --card-text-color: #000000;
+  /* search*/
+  --search-background: #ececec;
+  /* button */
+  --button-background: #1757a0;
+  --button-background-hover: #2572b6;
+  --button-text-color: #ffffff;
 }
 
 @theme inline {
@@ -14,8 +24,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    /* base */
+    --background: #00213e;
     --foreground: #ededed;
+
+    /* card */
+    --card-background: #0a3258;
+    --card-background-hover: #1364a0;
+    --card-text-color: #ffffff;
+    /* search*/
+    --search-background: #1a3a57;
+    /* button */
+    --button-background: #1757a0;
+    --button-background-hover: #2572b6;
+    --button-text-color: #ffffff;
   }
 }
 
@@ -23,4 +45,28 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+  background: var(--search-background);
+}
+
+button {
+  background: var(--button-background);
+  color: var(--button-text-color);
+  transition: background 0.3s ease; 
+}
+
+button:hover {
+  background: var(--button-background-hover);
+}
+
+div.card {
+  background: var(--card-background);
+  color: var(--card-text-color);
+  transition: background 0.3s ease;
+}
+
+div.card:hover {
+  background-color: var(--card-background-hover);
 }

@@ -1,103 +1,164 @@
+'use client'
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const words = ["São Paulo", "Paris", "Recife", "Londres", "Buenos Aires", "Gramado", "Dubai", "Istambul", "Fortaleza"];
+  const [currentWord, setCurrentWord] = useState("");
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    if (index >= words.length) {
+      setIndex(0);
+      return;
+    }
+
+    if (subIndex === words[index].length + 1 && !deleting) {
+      setTimeout(() => setDeleting(true), 3000); // pausa antes de apagar
+      return;
+    }
+
+    if (subIndex === 0 && deleting) {
+      setDeleting(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (deleting ? -1 : 1));
+    }, deleting ? 50 : 150);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, deleting]);
+
+  useEffect(() => {
+    setCurrentWord(words[index].substring(0, subIndex));
+  }, [subIndex, index]);
+
+  return (
+    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      { /* CONTEÚDO PRINCIPAL */ }
+      <main className="col-span-12 lg:col-span-10 mt-2.5">
+        <div className="grid col-span-4">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none"
+            viewBox="0 0 24 24" 
+            strokeWidth={1.5} 
+            stroke="currentColor" 
+            className="size-4 absolute"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </svg>
+
+          <span className="font-semibold mx-5 text-xs uppercase">Itinerar.io</span>
+        </div>
+
+        <h1 className="text-3xl md:text-5xl mt-3 mb-2">
+          O que fazer em {` `}
+          <span className="text-blue-400 border-r-2 border-blue-400 pr-1">{currentWord}</span>
+        </h1>
+
+        { /* BARRA DE PESQUISA */ }
+        <div className="w-full grid place-items-center mt-5 mb-3">
+          <div className="relative w-full md:w-2/3 lg:w-2/3">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" viewBox="0 0 24 24" 
+              strokeWidth={1.5}
+              stroke="currentColor" 
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" 
+              />
+            </svg>
+
+            <input
+              type="text" 
+              placeholder="Pesquisar cidade" 
+              className="w-full px-10 py-3 rounded-2xl border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+            />
+          </div>
+        </div>
+
+        { /* BOTÃO DE BUSCA */ }
+        <div className="grid place-items-center w-full">
+          <button className="rounded-2xl px-6 py-3 w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer">
+            Buscar
+          </button>
+        </div>
+
+        { /* HOT TOPIcs */ }
+        <h1 className="text-2xl md:text-3xl mt-3.5 mb-3.5">Roteiros em destaque</h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="card rounded-2xl cursor-pointer overflow-hidden">
+            <div className="relative w-full h-48">
+              <Image 
+                src={'/paris.png'} 
+                className="object-cover" 
+                fill 
+                sizes="(max-width: 768px) 100vw, 
+                  (max-width: 1024px) 50vw, 
+                  33vw"
+                priority
+                alt="cidade"
+              />
+            </div>
+            <div className="px-6 py-3 text-xl md:text-2xl">Paris</div>
+          </div>
+
+          <div className="card rounded-2xl cursor-pointer overflow-hidden">
+            <div className="relative w-full h-48">
+              <Image 
+                src={'/roma.jpg'} 
+                className="object-cover" 
+                fill
+                sizes="(max-width: 768px) 100vw, 
+                  (max-width: 1024px) 50vw, 
+                  33vw"
+                priority
+                alt="cidade"
+              />
+            </div>
+            <div className="px-6 py-3 text-2xl">Roma</div>
+          </div>
+
+          <div className="card rounded-2xl cursor-pointer overflow-hidden">
+            <div className="relative w-full h-48">
+              <Image 
+                src={'/jericoacoara.png'} 
+                className="object-cover" 
+                fill
+                sizes="(max-width: 768px) 100vw, 
+                  (max-width: 1024px) 50vw, 
+                  33vw"
+                priority
+                alt="cidade"
+              />
+            </div>
+            <div className="px-6 py-3 text-2xl">Jericoacoara</div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      
+      { /* Coluna lateral direita (ADS)*/ }
+      <aside className="col-span-2 border-2 mt-auto">
+        <Image className="rounded-2xl" src={'/adbanner.jpg'} width={400} height={400} alt="anúncio" priority  />
+        <Image className="mt-2.5 rounded-2xl" src={'/adbanner.jpg'} width={400} height={400} alt="anúncio" priority />
+      </aside>
+
+      <footer className="grid col-span-12">Itinerar.io - Feito por Robson Lopes Cavalcante</footer>
     </div>
   );
 }
