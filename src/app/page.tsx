@@ -1,27 +1,20 @@
 import Advertisement from "@/components/Advertisement";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import HotTopics from "@/components/HotTopics";
-import Logo from "@/components/Logo";
-import MainTitle from "@/components/MainTitle";
-import SearchBar from "@/components/SearchBar";
-import SearchButton from "@/components/SearchButton";
+import SearchSection from "@/components/SearchSection";
+import { getItineraryDirections } from "@/lib/directions";
+import { getTuristicPlaces } from "@/lib/googlePlaces";
 
-export default function Home() {
+export default async function Home() {
+  await getTuristicPlaces()
+  // await getItineraryDirections(["ChIJP6FKmNV_mQAR3gKVAdeEyZ0", "ChIJA0tgM6PVmwARYbqb7Eo9VO4"])
   return (
-    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-4 gap-y-6 lg:gap-y-8">
       { /* CONTEÚDO PRINCIPAL */ }
-      <main className="col-span-12 lg:col-span-10 mt-2.5">
-        <Logo />
-
-        { /* NOME DINÂMICO */ }
-        <MainTitle />
-
-        { /* BARRA DE PESQUISA */ }
-        <SearchBar />
-
-        { /* BOTÃO DE BUSCA */ }
-        <SearchButton />
-
+      <Header />
+      <main className="col-span-12 lg:col-span-10">
+        <SearchSection />
         { /* HOT TOPIcs */ }
         <HotTopics />
       </main>

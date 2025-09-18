@@ -1,6 +1,6 @@
 export default function SearchBar() {
   return (
-    <div className="w-full grid place-items-center mt-5 mb-3">
+    <div className="w-full grid place-items-center mb-3">
       <div className="relative w-full md:w-2/3 lg:w-2/3">
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
