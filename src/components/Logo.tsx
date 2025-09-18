@@ -1,13 +1,13 @@
 export default function Logo() {
   return (
-    <div className="grid col-span-4">
+    <div className="grid grid-cols-[auto_1fr] items-center gap-2 w-fit">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-4 absolute"
+        className="size-5"
       >
         <path 
           strokeLinecap="round" 
@@ -16,7 +16,7 @@ export default function Logo() {
         />
       </svg>
 
-      <span className="font-semibold mx-5 text-xs uppercase">Itinerar.io</span>
+      <span className="font-semibold text-xs uppercase">Itinerar.io</span>
     </div>
   )
 }

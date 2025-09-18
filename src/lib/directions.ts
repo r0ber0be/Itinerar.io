@@ -1,9 +1,8 @@
+const BASE_URL = process.env.DIRECTIONS_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
 export async function getItineraryDirections(placeIds: string[]) {
   if (placeIds.length < 2) return null;
-
-  const url = "https://maps.googleapis.com/maps/api/directions/json";
   
   const origin = `place_id:${placeIds[0]}`;
   const destination = `place_id:${placeIds[placeIds.length - 1]}`;
@@ -21,7 +20,7 @@ export async function getItineraryDirections(placeIds: string[]) {
   });
 
   try {
-    const response = await fetch(`${url}?${params.toString()}`);
+    const response = await fetch(`${BASE_URL}?${params.toString()}`);
     if (!response.ok) {
       throw new Error(`Erro na API de Direções: ${response.statusText}`);
     }

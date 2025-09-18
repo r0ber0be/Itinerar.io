@@ -10,17 +10,19 @@ export default async function Home() {
   await getTuristicPlaces()
   // await getItineraryDirections(["ChIJP6FKmNV_mQAR3gKVAdeEyZ0", "ChIJA0tgM6PVmwARYbqb7Eo9VO4"])
   return (
-    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-4 gap-y-6 lg:gap-y-8">
+    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
       { /* CONTEÚDO PRINCIPAL */ }
       <Header />
-      <main className="col-span-12 lg:col-span-10">
-        <SearchSection />
-        { /* HOT TOPIcs */ }
-        <HotTopics />
-      </main>
-      
-      { /* Coluna lateral direita (ADS)*/ }
-      <Advertisement />
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <main className="col-span-12 lg:col-span-10 mt-2.5">
+          <SearchSection />
+          { /* HOT TOPIcs */ }
+          <HotTopics />
+        </main>
+        
+        { /* Coluna lateral direita (ADS)*/ }
+        <Advertisement />
+      </div>
 
       <Footer />
     </div>

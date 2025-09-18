@@ -1,4 +1,4 @@
-const BASE_URL = "https://places.googleapis.com/v1/places";
+const BASE_URL = process.env.PLACES_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
 export async function getTuristicPlaces() {
