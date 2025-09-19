@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Advertisement() {
   return (
-    <aside className="col-span-2 mt-auto">
+    <aside className="hidden lg:block col-span-2 mt-2.5">
       <Image 
         className="rounded-2xl" 
         src={'/adbanner.jpg'} 

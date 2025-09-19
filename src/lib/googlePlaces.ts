@@ -1,9 +1,9 @@
 const BASE_URL = process.env.PLACES_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
-export async function getTuristicPlaces() {
+export async function getTuristicPlaces(city: string) {
  const url = `${BASE_URL}:searchText`;
-  const query = `Pontos turísticos em ${"Rio de janeiro"}`;
+  const query = `Pontos turísticos em ${city}`;
 
   const headers = {
     "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export async function getTuristicPlaces() {
   const body = JSON.stringify({
     textQuery: query,
     languageCode: "pt-BR",
-    maxResultCount: 1,
+    maxResultCount: 9,
   });
 
   try {
@@ -38,4 +38,9 @@ export async function getTuristicPlaces() {
     console.error("Erro ao buscar lugares:", error);
     return [];
   }
+}
+
+export function getPhotoUrl(photoName: string, maxWidthPx: number = 400): string {
+  const API_KEY = process.env.ITINERARIO_KEY_MAPS;
+  return `https://places.googleapis.com/v1/${photoName}/media?key=${API_KEY}&maxWidthPx=${maxWidthPx}`;
 }

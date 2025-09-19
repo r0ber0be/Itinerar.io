@@ -1,3 +1,5 @@
+"use server"
+
 const BASE_URL = process.env.DIRECTIONS_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
