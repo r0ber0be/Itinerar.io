@@ -12,10 +12,9 @@ export default function HotTopics() {
               src={'/paris.png'} 
               className="object-cover" 
               fill 
-              sizes="(max-width: 768px) 100vw, 
-                (max-width: 1024px) 50vw, 
-                33vw"
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               priority
+              fetchPriority="high"
               alt="Ruelas charmosas de Paris, França, com arquitetura antiga ao pôr do sol."
             />
           </div>
@@ -28,9 +27,7 @@ export default function HotTopics() {
               src={'/roma.jpg'} 
               className="object-cover" 
               fill
-              sizes="(max-width: 768px) 100vw, 
-                (max-width: 1024px) 50vw, 
-                33vw"
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               priority
               alt="Ruelas charmosas de Roma, Itália, com arquitetura antiga ao pôr do sol."
             />
@@ -44,9 +41,7 @@ export default function HotTopics() {
               src={'/jericoacoara.png'} 
               className="object-cover" 
               fill
-              sizes="(max-width: 768px) 100vw, 
-                (max-width: 1024px) 50vw, 
-                33vw"
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
               priority
               alt="Ruelas charmosas de Jericoacoara, com visão encantadora do mar."
             />

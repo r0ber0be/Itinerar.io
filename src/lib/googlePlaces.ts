@@ -37,8 +37,3 @@ export async function getTuristicPlaces(city: string) {
     return [];
   }
 }
-
-export function getPhotoUrl(photoName: string, maxWidthPx: number = 400): string {
-  const API_KEY = process.env.ITINERARIO_KEY_MAPS;
-  return `https://places.googleapis.com/v1/${photoName}/media?key=${API_KEY}&maxWidthPx=${maxWidthPx}`;
-}
