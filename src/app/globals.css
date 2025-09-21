@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fefcf5;
+  --background: #e0e3e4;
   --foreground: #171717;
 
   /* card */
-  --card-background: #e6e6e6;
+  --card-background: #ececec;
+  --card-background-hover: #fefefe;
   --card-text-color: #000000;
   /* search*/
   --search-background: #ececec;

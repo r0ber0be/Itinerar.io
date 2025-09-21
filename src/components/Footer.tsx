@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="text-center py-4 text-sm">
-      Itinerar.io - Feito por Robson Lopes Cavalcante
+      Itinerar.io - Unleashed Giants 2025
     </footer>
   )
 }

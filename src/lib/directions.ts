@@ -14,7 +14,6 @@ export async function getItineraryDirections(placeIds: string[]) {
   const params = new URLSearchParams({
     origin,
     destination,
-    types: "tourist_attraction",
     waypoints: `optimize:true|${waypoints}`,
     key: API_KEY || "",
     language: "pt-BR",
@@ -27,7 +26,6 @@ export async function getItineraryDirections(placeIds: string[]) {
       throw new Error(`Erro na API de Direções: ${response.statusText}`);
     }
     const data = await response.json();
-    console.log(data)
     return data;
   } catch (error) {
     console.error("Erro ao buscar direções:", error);

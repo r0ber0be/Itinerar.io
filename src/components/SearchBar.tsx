@@ -19,7 +19,7 @@ export default function SearchBar() {
         <input
           type="text"
           name="city"
-          placeholder="Pesquisar cidade" 
+          placeholder="Buscar cidade" 
           className="w-full px-10 py-3 rounded-2xl border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
         />
       </div>

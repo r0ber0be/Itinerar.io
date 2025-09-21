@@ -10,11 +10,25 @@ export interface ItineraryPlace {
   rating?: number;
   websiteUri?: string;
   photoUrl?: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+}
+
+interface Leg {
+  distance: { text: string };
+  duration: { text: string };
 }
 
 export interface ItineraryResult {
   places: ItineraryPlace[];
   error?: string;
+  mapData?: {
+    bounds: any;
+    polyline: string;
+  };
+  legs?: Leg[];
 }
 
 export async function generateItinerary(
@@ -42,31 +56,45 @@ export async function generateItinerary(
       rating: place.rating,
       websiteUri: place.websiteUri,
       photoUrl: place.photos?.[0]?.name ? getPhotoUrl(place.photos[0].name) : undefined,
+      location: {
+        lat: place.location.latitude,
+        lng: place.location.longitude,
+      },
     }));
+
+    let legs: Leg[] | undefined = undefined;
+    let mapData: ItineraryResult['mapData'] = undefined;
     
     // OTIMIZANDO A ROTA E REORDENANDO A LISTA
     if (formattedPlaces.length > 1) {
       const placeIds = formattedPlaces.map(place => place.id);
-      
       const directionsResponse = await getItineraryDirections(placeIds);
       
       // Verifica se a otimização funcionou e reordena
-      if (directionsResponse && directionsResponse.routes[0]?.waypoint_order) {
-        const optimizedOrder = directionsResponse.routes[0].waypoint_order;
+      if (directionsResponse && directionsResponse.routes[0]) {
+        const route = directionsResponse.routes[0];
         
-        // Separa os pontos intermediários do início e fim
-        const origin = formattedPlaces[0];
-        const destination = formattedPlaces[formattedPlaces.length - 1];
-        const originalWaypoints = formattedPlaces.slice(1, -1);
+        legs = route.legs;
+        mapData = {
+          bounds: route.bounds,
+          polyline: route.overview_polyline.points,
+        };
         
-        // Reordena os waypoints
-        const optimizedWaypoints = optimizedOrder.map((index: number) => originalWaypoints[index]);
-      
-        const reorderedPlaces = [origin, ...optimizedWaypoints, destination];
-        formattedPlaces = reorderedPlaces;
+        if (route.waypoint_order) {
+          const optimizedOrder = route.waypoint_order;
+          
+          const origin = formattedPlaces[0];
+          const destination = formattedPlaces[formattedPlaces.length - 1];
+          const originalWaypoints = formattedPlaces.slice(1, -1);
+          
+          const optimizedWaypoints = optimizedOrder.map((index: number) => originalWaypoints[index]);
+        
+          const reorderedPlaces = [origin, ...optimizedWaypoints, destination];
+          formattedPlaces = reorderedPlaces;
+        }
       }
     }
-    return { places: formattedPlaces };
+    return { places: formattedPlaces, legs, mapData };
   } catch (error) {
     console.error(error);
     return { places: [], error: "Ocorreu um erro inesperado ao buscar o itinerário." };
