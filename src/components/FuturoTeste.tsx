@@ -18,7 +18,7 @@ export default function Teste() {
             {/* 3. Este div será sua coluna da direita */}
             <div className="w-full h-48 md:h-auto overflow-hidden"> {/* md:h-auto para preencher a altura na grid */}
               <img
-                src="https://places.googleapis.com/v1/places/ChIJ0RGdBvFZzpQRQeWcrwlhk8s/photos/AciIO2fyyUWACafcFjxELdMK6zkdBJF-Si6-CrnRpdhg_WAk9kgQbFmjrOXiYgjnyI2iu2cFMGXDs0RZh2r0FjSfouqacOgj1zJrNF95Qxn4sAa6UUTAWpg5QvdZu6bUQD4lfx9wSxmuSxsf7Zx09JJIvABR2bqPDWY-REeqfAXAyFVkjcTgEGbgKIkfvRo8KIVZEONUHSf4Iv72lwFYqG04vO4oZUNfX6dUIYh0ADpL8wLWHKA4mUaXD9arZJASXoO9rWQRNmtZiTj747PZ5MmF0dCcvKFN8qXWu3JSNDi19caC4N5d-nyPhqgRMXRZxePPMlIhXOl_z9t6c3fFa-tlhqWuk0k7ONy6f-ULa7obn1hAsNSuiE0xg2mD8jUTU6z1aKz6nGvSobJVM-v9Y-q_PuWyaCmX90ISXoqiTPVftpqCe2Vv/media?key=AIzaSyCFMwAq8F7aIPfAV0Hx_RH61jl0Ux0dx6s&maxWidthPx=400"
+                src=""
                 alt="Parque Ibirapuera"
                 className="w-full h-full object-cover"
               />
@@ -30,7 +30,7 @@ export default function Teste() {
       <div className="w-full border h-[250px] relative overflow-hidden rounded-lg shadow-lg">
         {/* Lado esquerdo */}
         <img 
-          src="https://places.googleapis.com/v1/places/ChIJ0RGdBvFZzpQRQeWcrwlhk8s/photos/AciIO2fyyUWACafcFjxELdMK6zkdBJF-Si6-CrnRpdhg_WAk9kgQbFmjrOXiYgjnyI2iu2cFMGXDs0RZh2r0FjSfouqacOgj1zJrNF95Qxn4sAa6UUTAWpg5QvdZu6bUQD4lfx9wSxmuSxsf7Zx09JJIvABR2bqPDWY-REeqfAXAyFVkjcTgEGbgKIkfvRo8KIVZEONUHSf4Iv72lwFYqG04vO4oZUNfX6dUIYh0ADpL8wLWHKA4mUaXD9arZJASXoO9rWQRNmtZiTj747PZ5MmF0dCcvKFN8qXWu3JSNDi19caC4N5d-nyPhqgRMXRZxePPMlIhXOl_z9t6c3fFa-tlhqWuk0k7ONy6f-ULa7obn1hAsNSuiE0xg2mD8jUTU6z1aKz6nGvSobJVM-v9Y-q_PuWyaCmX90ISXoqiTPVftpqCe2Vv/media?key=AIzaSyCFMwAq8F7aIPfAV0Hx_RH61jl0Ux0dx6s&maxWidthPx=400"
+          src=""
           alt="Parque Ibirapuera" 
           className="absolute inset-0 w-12/12 h-full object-cover place-items-end"
         />
