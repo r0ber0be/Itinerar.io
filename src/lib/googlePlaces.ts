@@ -14,7 +14,7 @@ export async function getTuristicPlaces(city: string) {
 
   const body = JSON.stringify({
     textQuery: query,
-    languageCode: "pt-BR",
+    languageCode: "pt-br",
     maxResultCount: 3,
   });
 

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { Locale } from "@/i18nConfig";
+import { TranslationProvider } from "@/components/providers/TranslationProvider";
+import { getDictionary } from "@/lib/getDictionary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,17 +20,22 @@ export const metadata: Metadata = {
   description: 'Descubra o que fazer em São Paulo, Paris, Londres e muito mais. Crie roteiros de viagem personalizados com as melhores dicas e atrações.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale };
 }>) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang);
+
   return (
-    <html lang="pt-br">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang={lang}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <TranslationProvider dictionary={dictionary}>
+          {children}
+        </TranslationProvider>
       </body>
     </html>
   );

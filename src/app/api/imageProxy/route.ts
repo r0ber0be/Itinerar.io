@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     headers.set('Content-Type', contentType || 'application/octet-stream');
     headers.set(
       'Cache-Control',
-      'public, max-age=86400, s-maxage=2592000' // Detalhes abaixo
+      'public, max-age=86400, s-maxage=2592000'
     );
 
     return new Response(imageResponse.body, {

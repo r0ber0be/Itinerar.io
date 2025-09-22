@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "./providers/TranslationProvider";
 
 export default function HotTopics() {
+  const dictionary = useTranslation();
   return (
     <>
-      <h2 className="text-2xl md:text-3xl mt-3.5 mb-3.5">Roteiros em destaque</h2>
+      <h2 className="text-2xl md:text-3xl mt-3.5 mb-3.5">
+        { dictionary.featuredRoutes }
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <div className="card rounded-2xl cursor-pointer overflow-hidden">

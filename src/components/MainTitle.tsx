@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "./providers/TranslationProvider";
 
 export default function MainTitle() {
   const words = ["São Paulo", "Paris", "Recife", "Londres", "Buenos Aires", "Gramado", "Dubai", "Istambul", "Fortaleza"];
@@ -8,6 +9,7 @@ export default function MainTitle() {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const dictionary = useTranslation();
 
   useEffect(() => {
     if (index >= words.length) {
@@ -39,7 +41,7 @@ export default function MainTitle() {
 
   return (
     <h1 className="text-3xl md:text-5xl mt-3 mb-2">
-      O que fazer em {` `}
+      { dictionary.mainTitle } {` `}
       <span className="text-blue-400 border-r-2 border-blue-400 pr-1">{currentWord}</span>
     </h1>
   )

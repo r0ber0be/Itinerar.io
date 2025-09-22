@@ -16,7 +16,7 @@ export async function getItineraryDirections(placeIds: string[]) {
     destination,
     waypoints: `optimize:true|${waypoints}`,
     key: API_KEY || "",
-    language: "pt-BR",
+    language: "pt-br",
     mode: "driving", // ou walking, transit
   });
 

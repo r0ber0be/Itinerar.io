@@ -1,0 +1,12 @@
+{
+  "mainTitle": "What to do in",
+  "featuredRoutes": "Featured Itineraries",
+  "searchPlaceholder": "Search for a city",
+  "searchButton": "Search",
+  "itineraryFor": "Itinerary for",
+  "openGoogleMapsButton": "Open Route on Google Maps",
+  "startPoint": "Starting Point",
+  "endPoint": "End Point",
+  "imageUnavailable": "Image Unavailable",
+  "score": "Score"
+}

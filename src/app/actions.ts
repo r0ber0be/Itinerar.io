@@ -47,8 +47,7 @@ const getCachedItinerary = cache(
         displayName: place.displayName,
         formattedAddress: place.formattedAddress,
         rating: place.rating,
-        websiteUri: place.websiteUri,
-        photoUrl: place.photos?.[0]?.name ? `/api/image-proxy?photoName=${place.photos[0].name}` : undefined,
+        photoUrl: place.photos?.[0]?.name ? `/api/imageProxy?photoName=${place.photos[0].name}` : undefined,
         location: {
           lat: place.location.latitude,
           lng: place.location.longitude,
