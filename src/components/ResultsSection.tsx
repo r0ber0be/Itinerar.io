@@ -1,3 +1,5 @@
+"use client";
+
 import { ItineraryResult } from '@/app/actions';
 import { useMemo } from 'react';
 import { useTranslation } from './providers/TranslationProvider';

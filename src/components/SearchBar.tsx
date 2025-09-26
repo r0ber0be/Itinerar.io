@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslation } from "./providers/TranslationProvider"
 
 export default function SearchBar() {
@@ -21,7 +23,7 @@ export default function SearchBar() {
 
         <input
           type="text"
-          name="city"
+          name="q"
           placeholder={dictionary.searchPlaceholder}
           className="w-full px-10 py-3 rounded-2xl border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
         />

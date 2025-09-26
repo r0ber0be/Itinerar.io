@@ -22,6 +22,7 @@ export async function getItineraryDirections(placeIds: string[]) {
 
   try {
     const response = await fetch(`${BASE_URL}?${params.toString()}`);
+
     if (!response.ok) {
       throw new Error(`Erro na API de Direções: ${response.statusText}`);
     }
