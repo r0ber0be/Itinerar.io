@@ -31,10 +31,10 @@ export interface ItineraryResult {
   legs?: Leg[];
 }
 
-async function resolveItinerary(city: string): Promise<ItineraryResult> {
+async function resolveItinerary(city: string, lang: string): Promise<ItineraryResult> {
   console.log(`--- Buscando dados para "${city}" na API do Google (NÃO DO CACHE) ---`);
   try {
-    const placesFromAPI = await getTuristicPlaces(city);
+    const placesFromAPI = await getTuristicPlaces(city, lang);
 
     if (!placesFromAPI || placesFromAPI.length === 0) {
       return { places: [], error: `Nenhum ponto turístico encontrado para "${city}".` };
@@ -57,7 +57,7 @@ async function resolveItinerary(city: string): Promise<ItineraryResult> {
 
     if (formattedPlaces.length > 1) {
       const placeIds = formattedPlaces.map(place => place.id);
-      const directionsResponse = await getItineraryDirections(placeIds);
+      const directionsResponse = await getItineraryDirections(placeIds, lang);
 
       if (directionsResponse && directionsResponse.routes[0]) {
         const route = directionsResponse.routes[0];
@@ -85,12 +85,11 @@ async function resolveItinerary(city: string): Promise<ItineraryResult> {
   }
 }
 
-export async function fetchItinerary(city: string): Promise<ItineraryResult> {
-  const cityTag = `itinerary:${city.toLowerCase().replace(/\s/g, '-')}`;
-  const cachedFunction = cache(
-    resolveItinerary,
-    [`itineraries`, cityTag],
-    { revalidate: 86400, tags: ['itineraries', cityTag] }
-  );
-  return cachedFunction(city);
-}
+export const fetchItinerary = cache(
+  resolveItinerary,
+  ['itineraries'], // Chave base do cache
+  {
+    revalidate: 86400, // 24 horas
+    tags: ['itineraries'],
+  }
+);

@@ -1,9 +1,15 @@
 const BASE_URL = process.env.PLACES_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
-export async function getTuristicPlaces(city: string) {
+export async function getTuristicPlaces(city: string, lang: string) {
   const url = `${BASE_URL}:searchText`;
-  const query = `Lugares interessantes e pontos turísticos em ${city}`;
+  let query = "";
+
+  if(lang === "en") {
+    query = `Top tourist attractions and landmarks in ${city}`;
+  } else {
+    query = `Lugares interessantes e pontos turísticos em ${city}`;
+  }
 
   const headers = {
     "Content-Type": "application/json",
@@ -14,10 +20,11 @@ export async function getTuristicPlaces(city: string) {
 
   const body = JSON.stringify({
     textQuery: query,
-    languageCode: "pt-br",
+    languageCode: lang,
     maxResultCount: 3,
   });
 
+  console.log(query)
   try {
     const response = await fetch(url, {
       method: "POST",

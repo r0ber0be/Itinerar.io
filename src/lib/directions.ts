@@ -3,7 +3,7 @@
 const BASE_URL = process.env.DIRECTIONS_BASE_URL;
 const API_KEY = process.env.ITINERARIO_KEY_MAPS;
 
-export async function getItineraryDirections(placeIds: string[]) {
+export async function getItineraryDirections(placeIds: string[], lang: string) {
   if (placeIds.length < 2) return null;
   
   const origin = `place_id:${placeIds[0]}`;
@@ -16,7 +16,7 @@ export async function getItineraryDirections(placeIds: string[]) {
     destination,
     waypoints: `optimize:true|${waypoints}`,
     key: API_KEY || "",
-    language: "pt-br",
+    language: lang,
     mode: "driving", // ou walking, transit
   });
 
