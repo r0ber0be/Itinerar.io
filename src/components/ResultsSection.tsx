@@ -3,6 +3,8 @@
 import { ItineraryResult } from '@/app/actions';
 import { useMemo } from 'react';
 import { useTranslation } from './providers/TranslationProvider';
+import StarSVG from './svg/star';
+import PinSVG from './svg/pin';
 
 interface ResultsSectionProps {
   state: ItineraryResult;
@@ -52,14 +54,7 @@ export default function ResultsSection({ state, searchedCity }: ResultsSectionPr
           rel="noopener noreferrer"
           className="bg-blue-600 hover:bg-blue-700 font-bold my-4 py-3 px-6 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-3 text-lg"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6" 
-            viewBox="0 0 24 24" 
-            fill="currentColor"
-          >
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
+          <PinSVG />
           {dictionary.openGoogleMapsButton}
         </a>
       )}
@@ -89,54 +84,40 @@ export default function ResultsSection({ state, searchedCity }: ResultsSectionPr
               )}
               
               { legInfo && (
-                <div className="absolute top-2 left-2 p-2 text-xs bg-blue-500 rounded-lg">
+                <div className="absolute top-2 left-2 p-2 text-xs bg-blue-500 rounded-lg z-40">
                   <p className="font-semibold">
-                    {'<-'} Há {legInfo.duration} ({legInfo.distance})
+                    {'<-'} {legInfo.duration} ({legInfo.distance})
                   </p>
                 </div>
               )}
 
-              { place.photoUrl ? (
-                <img
-                  src={place.photoUrl}
-                  alt={place.displayName.text}
-                  className="w-full h-48 object-cover"
-                />
-              ) : (
-                <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500">
-                    { dictionary.imageUnavailable }
-                  </span>
-                </div>
-              )}
+              <div className="relative">
+                { place.photoUrl ? (
+                  <img
+                    src={place.photoUrl}
+                    alt={place.displayName.text}
+                    className="w-full h-48 object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-500">
+                      { dictionary.imageUnavailable }
+                    </span>
+                  </div>
+                )}
+
+                { place.rating &&
+                  <div className="absolute right-4 md:left-4 bottom-1 z-20">
+                    <p className="text-xs md:text-sm p-2 grid grid-flow-col auto-cols-max items-center gap-1 font-bold">
+                      { dictionary.score }: {place.rating} <StarSVG />
+                    </p>
+                  </div>
+                }
+              </div>
 
               <div className="p-4">
                 <h3 className="font-bold text-lg">{place.displayName.text}</h3>
                 <p className="text-gray-600 text-sm mt-1">{place.formattedAddress}</p>
-                { place.rating && 
-                  <p className="mt-2 grid grid-cols-2">
-                    { dictionary.score }: {place.rating}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"  width="1em" height="1em">
-                      <g fill="none">
-                        <path fill="url(#fluentColorStar320)" d="M14.655 3.84c.549-1.12 2.144-1.12 2.693 0l3.199 6.52l7.17 1.05c1.228.179 1.72 1.686.834 2.555l-5.195 5.096l1.224 7.183c.21 1.227-1.08 2.16-2.18 1.578l-6.399-3.385l-6.399 3.385c-1.1.582-2.389-.351-2.18-1.578l1.225-7.183l-5.196-5.096c-.885-.87-.394-2.376.834-2.556l7.17-1.048z"
-                        ></path>
-                        <defs>
-                          <linearGradient
-                            id="fluentColorStar320"
-                            x1="28.999"
-                            x2="2.157"
-                            y1="28.557"
-                            y2="3.34"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#FF6F47"></stop>
-                            <stop offset="1" stopColor="#FFCD0F"></stop>
-                          </linearGradient>
-                        </defs>
-                      </g>
-                    </svg>
-                  </p> 
-                }
               </div>
             </div>
           )}
