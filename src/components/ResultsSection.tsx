@@ -107,9 +107,9 @@ export default function ResultsSection({ state, searchedCity }: ResultsSectionPr
                 )}
 
                 { place.rating &&
-                  <div className="absolute right-4 md:left-4 bottom-1 z-20">
-                    <p className="text-xs md:text-sm p-2 grid grid-flow-col auto-cols-max items-center gap-1 font-bold">
-                      { dictionary.score }: {place.rating} <StarSVG />
+                  <div className="absolute right-4 bottom-1 z-20">
+                    <p className="text-xl font-bold p-2 grid grid-flow-col auto-cols-max items-center gap-1">
+                      {place.rating} <StarSVG />
                     </p>
                   </div>
                 }

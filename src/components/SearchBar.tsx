@@ -14,6 +14,7 @@ export default function SearchBar() {
           name="q"
           placeholder={dictionary.searchPlaceholder}
           className="w-full px-10 py-3 rounded-2xl border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+          required
         />
       </div>
     </div>
