@@ -44,7 +44,7 @@ export default function ResultsSection({ state, searchedCity }: ResultsSectionPr
   return (
     <div className="container mx-auto p-4 mt-3">
       <h2 className="text-2xl font-bold mb-4">
-        {dictionary.itineraryFor} {searchedCity}
+        {dictionary.itineraryFor} <span className="text-blue-400">{searchedCity}</span>
       </h2>
 
       { googleMapsUrl && (

@@ -24,7 +24,6 @@ export async function getTuristicPlaces(city: string, lang: string) {
     maxResultCount: 3,
   });
 
-  console.log(query)
   try {
     const response = await fetch(url, {
       method: "POST",
