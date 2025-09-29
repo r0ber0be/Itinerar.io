@@ -20,12 +20,16 @@ export const metadata: Metadata = {
   description: 'Descubra o que fazer em São Paulo, Paris, Londres e muito mais. Crie roteiros de viagem personalizados com as melhores dicas e atrações.',
 };
 
+interface LayoutProps {
+  params: Promise<{ lang: Locale }>
+}
+
 export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: LayoutProps['params'];
 }>) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);

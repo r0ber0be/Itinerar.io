@@ -12,7 +12,6 @@ type Dictionary = {
   startPoint: string;
   endPoint: string;
   imageUnavailable: string;
-  score: string;
 };
 
 const TranslationContext = createContext<Dictionary | null>(null);
