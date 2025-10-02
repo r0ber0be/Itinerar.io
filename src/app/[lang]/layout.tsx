@@ -23,18 +23,13 @@ export const metadata: Metadata = {
   description: 'Descubra os melhores pontos turísticos e o que fazer em qualquer destino, como São Paulo, Paris, Londres e muito mais. Crie roteiros de viagem personalizados com as melhores dicas e atrações.',
 };
 
-interface LayoutProps {
-  params: Promise<{ lang: Locale }>
-}
-
 export default async function RootLayout({
   children,
-  params,
+  params: { lang },
 }: Readonly<{
   children: React.ReactNode;
-  params: LayoutProps['params'];
+  params: { lang: Locale };
 }>) {
-  const { lang } = await params;
   const dictionary = await getDictionary(lang);
 
   return (

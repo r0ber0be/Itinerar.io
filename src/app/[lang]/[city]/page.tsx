@@ -8,18 +8,13 @@ import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 import { Locale } from "@/i18nConfig";
 
-interface PageProps {
-  params: Promise<{ lang: Locale; city: string }>,
-}
-
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function generateMetadata({ 
-  params
+  params: { city, lang }
 }: Readonly<{
-  params: PageProps['params']
+  params: { city: string, lang: Locale }
 }>): Promise<Metadata> {
-  const { city, lang } = await params;
 
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
@@ -41,11 +36,10 @@ export async function generateMetadata({
 }
 
 export default async function Home({ 
-  params
+  params: { city, lang }
 }: Readonly<{
-  params: PageProps['params']
+  params: { city: string, lang: Locale }
 }>) {
-  const { lang, city } = await params;
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
 
