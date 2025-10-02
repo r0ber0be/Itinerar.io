@@ -21,7 +21,7 @@ export async function getTuristicPlaces(city: string, lang: string) {
   const body = JSON.stringify({
     textQuery: query,
     languageCode: lang,
-    maxResultCount: 3,
+    maxResultCount: 9,
   });
 
   try {

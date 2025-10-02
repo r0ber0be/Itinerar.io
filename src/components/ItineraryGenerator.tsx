@@ -8,7 +8,6 @@ export default function ItineraryGenerator({ lang }: { lang: string }) {
 
   function handleSearch(formData: FormData) {
     const city = formData.get("q")?.toString().trim();
-    console.log("----------- cidade-------", city, lang)
     if (city) {
       router.push(`/${lang}/${encodeURIComponent(city.toLowerCase())}`);
     }

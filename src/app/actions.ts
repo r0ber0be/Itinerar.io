@@ -32,7 +32,6 @@ export interface ItineraryResult {
 }
 
 async function resolveItinerary(city: string, lang: string): Promise<ItineraryResult> {
-  console.log(`--- Buscando dados para "${city}" na API do Google (NÃO DO CACHE) ---`);
   try {
     const placesFromAPI = await getTuristicPlaces(city, lang);
 
