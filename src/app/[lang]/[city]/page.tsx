@@ -26,7 +26,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais.`,
-      images: [`${baseUrl}/default-og-image.png`], 
+      images: [`${baseUrl}/assets/default-og-image.png`], 
       url: `${baseUrl}/${lang}/${decodedCity}`,
       siteName: "Itinerar.io",
       locale: lang,

@@ -9,17 +9,17 @@ import { usePathname } from "next/navigation";
 const topics = [
   {
     city: "Paris",
-    imageUrl: "/paris.png",
+    imageUrl: "/assets/paris.png",
     alt: "A Torre Eiffel em Paris, vista do rio Sena, com uma ponte e árvores com folhagem de outono.",
   },
   {
     city: "Roma",
-    imageUrl: "/roma.jpg",
+    imageUrl: "/assets/roma.jpg",
     alt: "O Coliseu em Roma ao nascer do sol, com os raios de luz brilhando intensamente ao lado da antiga estrutura.",
   },
   {
     city: "Jericoacoara",
-    imageUrl: "/jericoacoara.png",
+    imageUrl: "/assets/jericoacoara.png",
     alt: "A Pedra Furada em Jericoacoara, uma grande formação rochosa com um arco no centro, localizada na praia com o mar ao fundo.",
   }
 ]
