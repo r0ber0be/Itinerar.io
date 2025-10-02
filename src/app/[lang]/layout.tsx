@@ -2,13 +2,14 @@ import { Locale } from "@/i18nConfig";
 import { TranslationProvider } from "@/components/providers/TranslationProvider";
 import { getDictionary } from "@/lib/getDictionary";
 
-export default async function LangLayout({
-  children,
-  params: { lang },
-}: {
+type Props = {
   children: React.ReactNode;
-  params: { lang: Locale };
-}) {
+  params: Promise<{ lang: string }>;
+};
+
+export default async function LangLayout({ children, params }: Props) {
+  const resolvedParams = await params;
+  const lang = (resolvedParams.lang as Locale);
   const dictionary = await getDictionary(lang);
 
   return (
