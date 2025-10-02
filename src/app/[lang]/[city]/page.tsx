@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+import { fetchItinerary } from "@/app/actions";
 import Advertisement from "@/components/Advertisement";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -6,27 +8,40 @@ import MainContent from "@/components/ItineraryDisplay";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 import { Locale } from "@/i18nConfig";
-import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ lang: Locale; city: string }>,
 }
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function generateMetadata({ 
   params
 }: Readonly<{
   params: PageProps['params']
 }>): Promise<Metadata> {
-  const { city } = await params;
+  const { city, lang } = await params;
+
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-
+  
+  const itineraryResult = await fetchItinerary(decodedCity, lang);
+  const firstPlaceImage = itineraryResult.places?.[0]?.photoUrl;
+  const imageUrl = `${baseUrl}${firstPlaceImage}` 
+  const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`
+  
   return {
-    title: `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`,
-    description: `Explore ${decodedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`,
+    title,
+    description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`,
     openGraph: {
-      
-    }
+      title,
+      description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais.`,
+      images: imageUrl, 
+      url: `${baseUrl}/${lang}/${decodedCity}`,
+      siteName: "Itinerar.io",
+      locale: lang,
+      type: "website",
+    },
   }
 }
 
