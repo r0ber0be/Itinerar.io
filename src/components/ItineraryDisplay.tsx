@@ -1,6 +1,5 @@
 import { fetchItinerary, ItineraryResult } from "@/app/actions";
 import ResultsSection from "./ResultsSection";
-import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 
 interface MainContentProps {
   city: string;

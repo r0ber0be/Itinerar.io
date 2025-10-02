@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     );
 
     return new Response(imageResponse.body, {
-      headers: headers,
+      headers,
     });
 
   } catch (error) {

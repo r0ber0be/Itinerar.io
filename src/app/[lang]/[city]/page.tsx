@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { fetchItinerary } from "@/app/actions";
 import Advertisement from "@/components/Advertisement";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -24,10 +23,6 @@ export async function generateMetadata({
 
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-  
-  const itineraryResult = await fetchItinerary(decodedCity, lang);
-  const firstPlaceImage = itineraryResult.places?.[0]?.photoUrl;
-  const imageUrl = `${baseUrl}${firstPlaceImage}` 
   const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`
   
   return {
@@ -36,7 +31,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais.`,
-      images: imageUrl, 
+      images: [`${baseUrl}/default-og-image.png`], 
       url: `${baseUrl}/${lang}/${decodedCity}`,
       siteName: "Itinerar.io",
       locale: lang,

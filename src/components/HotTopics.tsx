@@ -38,7 +38,7 @@ export default function HotTopics() {
         { topics.map((topic) => (
           <Link
             key={topic.city}
-            href={`/${lang}?q=${encodeURIComponent(topic.city)}`}
+            href={`/${lang}/${encodeURIComponent(topic.city)}`}
              className="card rounded-2xl cursor-pointer overflow-hidden block transition-transform hover:scale-105"
           >
             <div className="card rounded-2xl cursor-pointer overflow-hidden">
