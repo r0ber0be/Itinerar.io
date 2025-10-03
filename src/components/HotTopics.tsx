@@ -38,13 +38,13 @@ export default function HotTopics() {
         { topics.map((topic) => (
           <Link
             key={topic.city}
-            href={`/${lang}/${encodeURIComponent(topic.city)}`}
+            href={`/${lang}/${encodeURIComponent(topic.city.toLowerCase())}`}
              className="card rounded-2xl cursor-pointer overflow-hidden block transition-transform hover:scale-105"
           >
             <div className="card rounded-2xl cursor-pointer overflow-hidden">
               <div className="relative w-full h-48">
                 <Image 
-                  src={topic.imageUrl} 
+                  src={topic.imageUrl}
                   className="object-cover" 
                   fill 
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"

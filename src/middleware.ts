@@ -13,24 +13,29 @@ function getLocale(request: NextRequest): string | undefined {
 
   // Usa o Negotiator para obter os idiomas preferidos do navegador do usuário
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  const locale = matchLocale(languages, locales, i18n.defaultLocale);
-
-  return locale;
+  
+  try {
+    const locale = matchLocale(languages, locales, i18n.defaultLocale);
+    return locale;
+  } catch (error) {
+    return i18n.defaultLocale;
+  }
 }
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+
+  const pathnameHasLocale = i18n.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
+  if (pathnameHasLocale) return;
 
-    return NextResponse.redirect(
-      new URL(`/${locale}${pathname}`, request.url)
-    )
-  }
+  const locale = getLocale(request);
+
+  return NextResponse.redirect(
+    new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
+  );
 }
 
 export const config = {
