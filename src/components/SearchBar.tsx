@@ -13,6 +13,7 @@ export default function SearchBar() {
           type="text"
           name="q"
           placeholder={dictionary.searchPlaceholder}
+          maxLength={60}
           className="w-full px-10 py-3 rounded-2xl border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
           required
         />
