@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,15 +26,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsenseKey = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
   return (
     <html lang="pt-br">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-7271082004651164"></meta>
-        <script 
+        <meta name="google-adsense-account" content={adsenseKey}></meta>
+        <Script 
           async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7271082004651164"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseKey}`}
           crossOrigin="anonymous"
-        ></script>
+        ></Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
