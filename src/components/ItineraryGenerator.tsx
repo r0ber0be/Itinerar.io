@@ -4,12 +4,14 @@ import { useRouter } from "next/navigation";
 import SearchSection from "./SearchSection";
 import { useState } from "react";
 
-export default function ItineraryGenerator({ lang }: { lang: string }) {
+export default function ItineraryGenerator({ lang }: Readonly<{ lang: string }>) {
   const router = useRouter();
    const [error, setError] = useState("");
 
   function handleSearch(formData: FormData) {
-    const city = formData.get("q")?.toString().trim()!;
+    const query = formData.get("q");
+    const city = typeof query === "string" ? query.trim() : "";
+
 
     if (Number(city.length) > 60) {
       setError('O nome da cidade não pode ter mais de 60 caracteres.');

@@ -10,13 +10,11 @@ import { Locale } from "@/i18nConfig";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-export async function generateMetadata(
-  props: Readonly<{
-    params: { city: string, lang: Locale }
-  }>
-): Promise<Metadata> {
-  const params = await props.params;
-  const { lang, city } = params;
+export async function generateMetadata({
+  params : { city, lang },
+}: Readonly<{
+  params: { city: string, lang: Locale }
+}>): Promise<Metadata> {
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
   const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`

@@ -19,10 +19,10 @@ const TranslationContext = createContext<Dictionary | null>(null);
 export function TranslationProvider({
   children,
   dictionary,
-}: {
+}: Readonly<{
   children: React.ReactNode;
   dictionary: Dictionary;
-}) {
+}>) {
   return (
     <TranslationContext.Provider value={dictionary}>
       {children}
