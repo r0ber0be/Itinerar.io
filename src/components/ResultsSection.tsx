@@ -11,7 +11,7 @@ interface ResultsSectionProps {
   searchedCity: string;
 }
 
-export default function ResultsSection({ state, searchedCity }: ResultsSectionProps) {
+export default function ResultsSection({ state, searchedCity }: Readonly<ResultsSectionProps>) {
   const { places, legs } = state;
   const dictionary = useTranslation();
 
@@ -23,7 +23,7 @@ export default function ResultsSection({ state, searchedCity }: ResultsSectionPr
     const baseUrl = 'https://www.google.com/maps/dir/';
 
     const origin = `origin=${encodeURIComponent(places[0].formattedAddress)}`;
-    const destination = `destination=${encodeURIComponent(places[places.length - 1].formattedAddress)}`;
+    const destination = `destination=${encodeURIComponent(places?.at(-1)!.formattedAddress)}`;
 
     const waypoints = places
       .slice(1, -1)

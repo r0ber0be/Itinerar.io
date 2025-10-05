@@ -1,5 +1,5 @@
 import 'server-only'
-import { Locale, i18n } from '@/i18nConfig'
+import { Locale } from '@/i18nConfig'
 
 const dictionaries: Record<Locale, () => Promise<any>> = {
   'en': () => import('@/dictionaries/en.json').then((module) => module.default),

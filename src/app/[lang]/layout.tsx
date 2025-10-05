@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export default async function LangLayout({ children, params }: Props) {
+export default async function LangLayout({ children, params }: Readonly<Props>) {
   const resolvedParams = await params;
   const lang = (resolvedParams.lang as Locale);
   const dictionary = await getDictionary(lang);

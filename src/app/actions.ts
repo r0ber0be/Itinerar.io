@@ -58,7 +58,7 @@ async function resolveItinerary(city: string, lang: string): Promise<ItineraryRe
       const placeIds = formattedPlaces.map(place => place.id);
       const directionsResponse = await getItineraryDirections(placeIds, lang);
 
-      if (directionsResponse && directionsResponse.routes[0]) {
+      if (directionsResponse?.routes[0]) {
         const route = directionsResponse.routes[0];
         legs = route.legs;
         mapData = {
@@ -69,7 +69,7 @@ async function resolveItinerary(city: string, lang: string): Promise<ItineraryRe
         if (route.waypoint_order) {
           const optimizedOrder = route.waypoint_order;
           const origin = formattedPlaces[0];
-          const destination = formattedPlaces[formattedPlaces.length - 1];
+          const destination = formattedPlaces.at(-1);
           const originalWaypoints = formattedPlaces.slice(1, -1);
           const optimizedWaypoints = optimizedOrder.map((index: number) => originalWaypoints[index]);
           const reorderedPlaces = [origin, ...optimizedWaypoints, destination];

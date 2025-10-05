@@ -7,7 +7,9 @@ import { i18n } from "@/i18nConfig";
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+  for (const [key, value] of request.headers) {
+    negotiatorHeaders[key] = value;
+  }
 
   const locales: string[] = [...i18n.locales];
 
@@ -18,6 +20,7 @@ function getLocale(request: NextRequest): string | undefined {
     const locale = matchLocale(languages, locales, i18n.defaultLocale);
     return locale;
   } catch (error) {
+    console.error("Erro ao tentar fazer o match de locale no middleware:", error);
     return i18n.defaultLocale;
   }
 }

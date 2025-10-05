@@ -7,7 +7,7 @@ export async function getItineraryDirections(placeIds: string[], lang: string) {
   if (placeIds.length < 2) return null;
   
   const origin = `place_id:${placeIds[0]}`;
-  const destination = `place_id:${placeIds[placeIds.length - 1]}`;
+  const destination = `place_id:${placeIds.at(-1)}`;
   const waypoints = placeIds.slice(1, -1).map(id => `place_id:${id}`).join('|');
 
   // optimize:waypoints=true otimiza a ordem das paradas

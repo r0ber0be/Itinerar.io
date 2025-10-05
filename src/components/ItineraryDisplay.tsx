@@ -6,8 +6,8 @@ interface MainContentProps {
   lang: string;
 }
 
-export default async function MainContent({ city, lang }: MainContentProps) {
-  let itineraryResult: ItineraryResult = { places: [] };
+export default async function MainContent({ city, lang }: Readonly<MainContentProps>) {
+  let itineraryResult: ItineraryResult;
 
   if(Number(city.length) > 60) {
     itineraryResult = {

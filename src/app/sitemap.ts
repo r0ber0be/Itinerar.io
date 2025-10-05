@@ -115,7 +115,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}`,
       lastModified: new Date(),
       changeFrequency: "daily",
-      priority: 1.0,
+      priority: 1,
       alternates: {
         languages: {
           "pt-br": `${baseUrl}/pt-br`,
