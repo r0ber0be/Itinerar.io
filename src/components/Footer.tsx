@@ -6,7 +6,7 @@ export default function Footer() {
         <p className="text-gray-500">
           © {currentYear} Itinerar - Todos os direitos reservados.
         </p>
-        <div className="text-xs text-gray-400 mt-2">Unleashed Giants - Awin</div>
+        <div className="text-xs text-gray-400 mt-2">Unleashed Giants</div>
       </div>
     </footer>
   )
