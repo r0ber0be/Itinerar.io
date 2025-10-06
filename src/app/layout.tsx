@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   verification: {
     me: "https://www.linkedin.com/in/robson-lopesc/",
   },
-  metadataBase: new URL("https://itinerar.vercel.app"), // garante base absoluta
+  metadataBase: new URL(baseUrl),
   openGraph: {
     title,
     description,
     url: `${baseUrl}`,
     siteName: "Itinerar",
-    locale: "pt_BR",
+    locale: "pt-br",
     type: "website",
     images: [
       {
