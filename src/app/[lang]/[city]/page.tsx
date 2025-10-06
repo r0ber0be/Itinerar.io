@@ -8,7 +8,7 @@ import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 import { Locale } from "@/i18nConfig";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
 export async function generateMetadata({
   params : { city, lang },
@@ -17,19 +17,47 @@ export async function generateMetadata({
 }>): Promise<Metadata> {
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-  const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`
+  const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`;
+  const description = `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`;
+  const pageUrl = `${baseUrl}/${lang}/${decodedCity}`;
+  const imageUrl = `${baseUrl}/assets/og-image.png`;
 
   return {
     title,
-    description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`,
+    description,
+    metadataBase: new URL(baseUrl),
+    robots: {
+      follow: true,
+      index: true,
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        "pt-br": `${baseUrl}/pt-br/${decodedCity}`,
+        "en": `${baseUrl}/en/${decodedCity}`,
+      }
+    },
     openGraph: {
       title,
-      description: `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais.`,
-      images: [`${baseUrl}/assets/default-og-image.png`], 
-      url: `${baseUrl}/${lang}/${decodedCity}`,
-      siteName: "Itinerar.io",
-      locale: lang,
+      description,
+      url: pageUrl,
+      siteName: "Itinerar",
+      locale: "pt-br",
       type: "website",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: "Logo Itinerar",
+        }
+      ], 
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
     },
   }
 }
