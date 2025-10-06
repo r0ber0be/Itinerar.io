@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/aasets/og-image.png",
+        url: "/assets/og-image.png",
         width: 1200,
         height: 630,
         alt: "Itinerar",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og-image.png"],
+    images: ["/assets/og-image.png"],
   },
 };
 
