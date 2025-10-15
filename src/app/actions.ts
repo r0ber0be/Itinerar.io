@@ -88,7 +88,7 @@ export const fetchItinerary = cache(
   resolveItinerary,
   ['itineraries'], // Chave base do cache
   {
-    revalidate: 86400, // 24 horas
+    revalidate: 259200, // 72 horas
     tags: ['itineraries'],
   }
 );

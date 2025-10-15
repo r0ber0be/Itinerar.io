@@ -19,15 +19,19 @@ const description = "Descubra os melhores pontos turísticos e o que fazer em qu
 export const metadata: Metadata = {
   title: {
     default: title,
-    template: '%s | Itinerar',
+    template: "%s | Itinerar",
   },
-  
-  authors: [{ name: "Robson Lopes Cavalcante", url: "https://www.linkedin.com/in/robson-lopesc/" }],
+  description,
   category: "travel",
+  keywords: ["roteiro de viagem", "turismo", "pontos turísticos", "viagem", "destinos", "atrações turísticas"],
+  authors: [{ name: "Robson Lopes Cavalcante", url: "https://www.linkedin.com/in/robson-lopesc/" }],
   verification: {
     me: "https://www.linkedin.com/in/robson-lopesc/",
   },
   metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
     title,
     description,
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
         url: "/assets/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Itinerar",
+        alt: "Itinerar - Roteiros de Viagem",
       },
     ],
   },
@@ -49,6 +53,17 @@ export const metadata: Metadata = {
     title,
     description,
     images: ["/assets/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -62,7 +77,7 @@ export default async function RootLayout({
     <html lang="pt-br">
       <head>
         <meta name="google-adsense-account" content={adsenseKey}></meta>
-        <script 
+        <script
           async 
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseKey}`}
           crossOrigin="anonymous"

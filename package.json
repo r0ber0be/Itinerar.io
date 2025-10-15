@@ -17,11 +17,13 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.5.4",
     "@tailwindcss/postcss": "^4",
     "@types/negotiator": "^0.6.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
