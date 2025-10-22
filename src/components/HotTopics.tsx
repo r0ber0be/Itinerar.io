@@ -23,6 +23,7 @@ const topics = [
     alt: "A Pedra Furada em Jericoacoara, uma grande formação rochosa com um arco no centro, localizada na praia com o mar ao fundo.",
   }
 ]
+
 export default function HotTopics() {
   const dictionary = useTranslation();
   const pathName = usePathname(); 
@@ -30,7 +31,7 @@ export default function HotTopics() {
   
   return (
     <>
-      <h2 className="text-2xl md:text-3xl mt-3.5 mb-3.5">
+      <h2 className="text-2xl md:text-3xl font-bold mt-3.5 mb-3.5">
         { dictionary.featuredRoutes }
       </h2>
 
@@ -51,7 +52,6 @@ export default function HotTopics() {
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                   priority
                   quality={75}
-                  fetchPriority="high"
                   alt={topic.alt}
                 />
               </div>
