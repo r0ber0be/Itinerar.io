@@ -124,6 +124,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
       }
     },
+    {
+      url:`${baseUrl}/pt-br/about`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url:`${baseUrl}/en/about`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url:`${baseUrl}/pt-br/privacy`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url:`${baseUrl}/en/privacy`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
     ...dynamicRoutes
   ]
 
