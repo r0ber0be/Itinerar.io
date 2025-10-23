@@ -76,6 +76,7 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <head>
+        <meta name="apple-mobile-web-app-title" content="Itinerar" />
         <meta name="google-adsense-account" content={adsenseKey}></meta>
         <script
           async 
