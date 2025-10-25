@@ -9,10 +9,15 @@ import HowItWorks from "@/components/HowItWorks";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { Locale } from "@/i18nConfig";
 
-export default async function Home({ 
-  params: { lang },
-}: Readonly<{ params: { lang: Locale }}>) {
+type HomeProps = {
+  params: Promise<{ lang: Locale }>;
+};
 
+export default async function Home({ 
+  params,
+}: Readonly<{ params: HomeProps['params']}>) {
+  const { lang } = await params;
+  
   return (
     <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
       { /* CONTEÚDO PRINCIPAL */ }

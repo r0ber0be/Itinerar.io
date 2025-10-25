@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,14 +80,16 @@ export default async function RootLayout({
       <head>
         <meta name="apple-mobile-web-app-title" content="Itinerar" />
         <meta name="google-adsense-account" content={adsenseKey}></meta>
-        <script
-          async 
+        <Script
+          id="adsense"
+          strategy="afterInteractive"
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseKey}`}
           crossOrigin="anonymous"
-        ></script>
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );

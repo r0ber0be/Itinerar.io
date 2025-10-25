@@ -10,11 +10,16 @@ import { Locale } from "@/i18nConfig";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
+type HomeProps = {
+  params: Promise<{ city: string, lang: string }>;
+};
+
 export async function generateMetadata({
-  params : { city, lang },
+  params,
 }: Readonly<{
-  params: { city: string, lang: Locale }
+  params: HomeProps['params']
 }>): Promise<Metadata> {
+  const { city, lang } = await params;
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
   const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`;
@@ -63,11 +68,12 @@ export async function generateMetadata({
 }
 
 export default async function Home({
-  params: { city, lang }
+  params
 }: Readonly<{
-  params: { city: string, lang: Locale }
+    params: HomeProps['params']
   }>
 ) {
+  const { city, lang } = await params;
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
 

@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
       protocol: "https",
       hostname: "www.awin1.com",
     }]
-  }
+  },
+  reactCompiler: true,
 };
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

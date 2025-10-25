@@ -17,8 +17,7 @@ function getLocale(request: NextRequest): string | undefined {
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
   
   try {
-    const locale = matchLocale(languages, locales, i18n.defaultLocale);
-    return locale;
+    return matchLocale(languages, locales, i18n.defaultLocale);
   } catch (error) {
     console.error("Erro ao tentar fazer o match de locale no middleware:", error);
     return i18n.defaultLocale;
@@ -26,7 +25,7 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const { pathname } = request.nextUrl;
 
   const pathnameHasLocale = i18n.locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
