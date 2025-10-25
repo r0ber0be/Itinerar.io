@@ -7,5 +7,47 @@
   "openGoogleMapsButton": "Open Route on Google Maps",
   "startPoint": "Starting Point",
   "endPoint": "End Point",
-  "imageUnavailable": "Image Unavailable"
+  "imageUnavailable": "Image Unavailable",
+  "hero": {
+    "title": "Plan your perfect trip",
+    "subtitle": "Discover the best tourist attractions and create personalized travel itineraries for any destination in the world."
+  },
+  "benefits": {
+    "title": "Why Use Itinerar?",
+    "items": [
+      "Personalized itineraries based on the best tourist attractions",
+      "Updated information about places, including ratings and photos",
+      "Optimized routes to make the most of your time",
+      "100% free and easy to use"
+    ]
+  },
+  "discover": {
+    "title": "Discover the World with Itinerar",
+    "firstParagraph": "Itinerar is your travel companion for exploring cities around the world. We create personalized itineraries featuring the most iconic tourist attractions, hidden gems, and must-visit places in any destination.",
+    "secondParagraph": "Whether you're planning a trip to Paris, exploring the streets of Rome, or relaxing on the beaches of Jericoacoara, our platform helps you make the most of your travel experience with optimized routes and up-to-date information."
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "steps": [
+      {
+        "id": 0,
+        "title": "Search for a City",
+        "description": "Enter the name of the city you want to visit in the search bar above."
+      },
+      {
+        "id": 1,
+        "title": "Get Your Itinerary",
+        "description": "We'll instantly generate a personalized itinerary with the top tourist attractions and points of interest."
+      },
+      {
+        "id": 2,
+        "title": "Explore and Plan",
+        "description": "View detailed information about each location, including ratings, addresses, and photos."
+      }
+    ]
+  },
+  "destinations": {
+    "title": "Popular Destinations",
+    "description": "Explore travel guides for the most visited cities in the world. From European capitals to paradisiacal beaches, we have complete itineraries for you."
+  }
 }

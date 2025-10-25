@@ -12,6 +12,27 @@ type Dictionary = {
   startPoint: string;
   endPoint: string;
   imageUnavailable: string;
+  hero: {
+    title: string;
+    subtitle: string;
+  };
+  benefits: {
+    title: string;
+    items: Array<string>;
+  },
+  discover: {
+    title: string;
+    firstParagraph: string;
+    secondParagraph: string;
+  },
+  howItWorks: {
+    title: string;
+    steps: [{
+      id: number;
+      title: string;
+      description: string;
+    }],
+  },
 };
 
 const TranslationContext = createContext<Dictionary | null>(null);
