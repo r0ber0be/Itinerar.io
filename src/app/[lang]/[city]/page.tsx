@@ -6,7 +6,6 @@ import HotTopics from "@/components/HotTopics";
 import MainContent from "@/components/ItineraryDisplay";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
-import { Locale } from "@/i18nConfig";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -85,11 +84,10 @@ export default async function Home({
         <main className="col-span-12 lg:col-span-10 mt-2.5">
           <ItineraryGenerator lang={lang} />
           <MainContent city={capitalizedCity} lang={lang} />
-          <HotTopics />
+          <HotTopics lang={lang} />
         </main>
         <Advertisement />
       </div>
-
       <Footer />
     </div>
   );

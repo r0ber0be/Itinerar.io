@@ -8,17 +8,25 @@ export async function getItineraryDirections(placeIds: string[], lang: string) {
   
   const origin = `place_id:${placeIds[0]}`;
   const destination = `place_id:${placeIds.at(-1)}`;
-  const waypoints = placeIds.slice(1, -1).map(id => `place_id:${id}`).join('|');
+  const waypointIds = placeIds.slice(1, -1).map(id => `place_id:${id}`);
+
+  if (!BASE_URL || !API_KEY) {
+    console.error("Erro ao buscar direções: variáveis de ambiente necessárias não configuradas.");
+    return null;
+  }
 
   // optimize:waypoints=true otimiza a ordem das paradas
   const params = new URLSearchParams({
     origin,
     destination,
-    waypoints: `optimize:true|${waypoints}`,
-    key: API_KEY || "",
+    key: API_KEY,
     language: lang,
     mode: "driving", // ou walking, transit
   });
+
+  if (waypointIds.length > 0) {
+    params.set("waypoints", `optimize:true|${waypointIds.join("|")}`);
+  }
 
   try {
     const response = await fetch(`${BASE_URL}?${params.toString()}`);

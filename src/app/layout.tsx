@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     default: title,
     template: "%s | Itinerar",
   },
+  applicationName: "Itinerar",
   description,
   category: "travel",
   keywords: ["roteiro de viagem", "turismo", "pontos turísticos", "viagem", "destinos", "atrações turísticas"],
@@ -33,6 +34,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   alternates: {
     canonical: baseUrl,
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Itinerar",
+    statusBarStyle: "default",
   },
   openGraph: {
     title,
@@ -79,13 +85,23 @@ export default async function RootLayout({
     <html lang="pt-br">
       <head>
         <meta name="apple-mobile-web-app-title" content="Itinerar" />
-        <meta name="google-adsense-account" content={adsenseKey}></meta>
-        <Script
-          id="adsense"
-          strategy="afterInteractive"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseKey}`}
-          crossOrigin="anonymous"
-        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="apple-touch-icon" href="/assets/web-app-manifest-192x192.png" />
+
+        <link rel="manifest" href="/manifest.webmanifest" />
+        {adsenseKey ? (
+          <>
+            <meta name="google-adsense-account" content={adsenseKey} />
+            <Script
+              id="adsense"
+              strategy="afterInteractive"
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseKey}`}
+              crossOrigin="anonymous"
+            />
+          </>
+        ) : null
+      }
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}

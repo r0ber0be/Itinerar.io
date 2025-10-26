@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "./providers/TranslationProvider";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 
 const topics = [
@@ -22,13 +22,21 @@ const topics = [
     imageUrl: "/assets/jericoacoara.png",
     alt: "A Pedra Furada em Jericoacoara, uma grande formação rochosa com um arco no centro, localizada na praia com o mar ao fundo.",
   }
-]
+];
 
-export default function HotTopics() {
+type HotTopicsProps = {
+  lang?: string;
+};
+
+export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps> = {}) {
   const dictionary = useTranslation();
-  const pathName = usePathname(); 
-  const lang = pathName.split('/')[1];
-  
+  const params = useParams<{ lang?: string | string[] }>();
+
+  const langFromParams = Array.isArray(params?.lang)
+    ? params.lang[0]
+    : params?.lang;
+
+  const lang = langProp ?? langFromParams ?? "pt-br";
   return (
     <>
       <h2 className="text-2xl md:text-3xl font-bold mt-3.5 mb-3.5">

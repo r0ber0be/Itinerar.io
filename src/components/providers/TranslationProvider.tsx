@@ -27,11 +27,11 @@ type Dictionary = {
   },
   howItWorks: {
     title: string;
-    steps: [{
+    steps: Array<{
       id: number;
       title: string;
       description: string;
-    }],
+    }>,
   },
 };
 
