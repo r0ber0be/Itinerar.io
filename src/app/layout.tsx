@@ -87,6 +87,8 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Itinerar" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/assets/icon0.svg" />\
         <link rel="apple-touch-icon" href="/assets/web-app-manifest-192x192.png" />
 
         <link rel="manifest" href="/manifest.webmanifest" />

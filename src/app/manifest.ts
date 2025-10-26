@@ -55,20 +55,6 @@ export default function manifest(): MetadataRoute.Manifest {
           },
         ],
       },
-      {
-        name: "Roteiros populares",
-        short_name: "Roteiros",
-        description: "Veja sugestões de roteiros prontos para inspiração.",
-        url: "/pt-br/destinos-populares",
-        icons: [
-          {
-            src: "/assets/web-app-manifest-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any",
-          },
-        ],
-      },
     ],
     screenshots: [
       {
