@@ -1,11 +1,12 @@
 import { Metadata } from "next";
-import Advertisement from "@/components/Advertisement";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HotTopics from "@/components/HotTopics";
 import MainContent from "@/components/ItineraryDisplay";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
+import NativeBanner from "@/components/AdsTerra/Native";
+import AdsBanner from "@/components/AdsTerra/AdsBanner";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -86,8 +87,9 @@ export default async function Home({
           <MainContent city={capitalizedCity} lang={lang} />
           <HotTopics lang={lang} />
         </main>
-        <Advertisement />
+        <AdsBanner />
       </div>
+      <NativeBanner />
       <Footer />
     </div>
   );

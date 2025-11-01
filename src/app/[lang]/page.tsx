@@ -1,4 +1,5 @@
-import Advertisement from "@/components/Advertisement";
+import AdsBanner from "@/components/AdsTerra/AdsBanner";
+import NativeBanner from "@/components/AdsTerra/Native";
 import Benefits from "@/components/Benefits";
 import Discover from "@/components/Discover";
 import Footer from "@/components/Footer";
@@ -33,16 +34,15 @@ export default async function Home({
 
           {/* LOCAIS POPULARES */}
           <HotTopics lang={lang} />
-
           {/* BENEFÍCIOS */}
           <Benefits />
 
           {/* SEO CONTENT */}
           <Discover />
         </main>
-        <Advertisement />
+        <AdsBanner />
       </div>
-
+      <NativeBanner />
       <Footer />
     </div>
   );
