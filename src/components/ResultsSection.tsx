@@ -69,8 +69,10 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
             duration: legs[index - 1].duration.text,
           } : undefined;
 
+          const { id, photoUrl, displayName, rating, editorialSummary, formattedAddress } = place;
+          console.log('result', editorialSummary)
           return (
-            <div key={place.id} className="relative border rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
+            <div key={id} className="relative border rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
               { isStartingPoint && (
                 <div className="absolute top-2 left-2 bg-green-500 text-xs font-bold p-2 rounded-lg z-10">
                   { dictionary.startPoint }
@@ -92,10 +94,10 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
               )}
 
               <div className="relative">
-                { place.photoUrl ? (
+                { photoUrl ? (
                   <img
-                    src={place.photoUrl}
-                    alt={place.displayName.text}
+                    src={photoUrl}
+                    alt={displayName.text}
                     className="w-full h-48 object-cover"
                   />
                 ) : (
@@ -106,18 +108,22 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
                   </div>
                 )}
 
-                { place.rating &&
+                { rating &&
                   <div className="absolute right-4 bottom-1 z-20">
                     <p className="text-xl font-bold p-2 grid grid-flow-col auto-cols-max items-center gap-1">
-                      {place.rating} <StarSVG />
+                      {rating} <StarSVG />
                     </p>
                   </div>
                 }
               </div>
 
-              <div className="p-4">
-                <h3 className="font-bold text-lg">{place.displayName.text}</h3>
-                <p className="text-gray-600 text-sm mt-1">{place.formattedAddress}</p>
+              <div className="relative p-4">
+                <h3 className="font-bold text-lg">{displayName.text}</h3>
+                { editorialSummary 
+                  ? <p className="text-sm mt-1">{editorialSummary.text}</p> 
+                  : <></>
+                }
+                <p className="text-gray-600 text-xs mt-1">{formattedAddress}</p>
               </div>
             </div>
           )}

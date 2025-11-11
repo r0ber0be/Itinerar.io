@@ -5,8 +5,6 @@ import HotTopics from "@/components/HotTopics";
 import MainContent from "@/components/ItineraryDisplay";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
-import NativeBanner from "@/components/AdsTerra/Native";
-import AdsBanner from "@/components/AdsTerra/AdsBanner";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -87,9 +85,7 @@ export default async function Home({
           <MainContent city={capitalizedCity} lang={lang} />
           <HotTopics lang={lang} />
         </main>
-        <AdsBanner />
       </div>
-      <NativeBanner />
       <Footer />
     </div>
   );

@@ -15,7 +15,7 @@ export async function getTuristicPlaces(city: string, lang: string) {
     "Content-Type": "application/json",
     "X-Goog-Api-Key": API_KEY || "",
     // Campos que queremos receber na resposta. Essencial para controlar custos!
-    "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.rating,places.photos,places.id,places.location",
+    "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.rating,places.photos,places.id,places.location,places.editorialSummary,places.types",
   };
 
   const body = JSON.stringify({
@@ -36,6 +36,10 @@ export async function getTuristicPlaces(city: string, lang: string) {
     }
 
     const data = await response.json();
+    console.log(data.places)
+    data.places.forEach((element: any) => {
+      console.log(element.photos[0].googleMapsUri)
+    });
     return data.places || [];
 
   } catch (error) {

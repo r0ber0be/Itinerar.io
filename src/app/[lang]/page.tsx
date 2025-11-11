@@ -1,5 +1,3 @@
-import AdsBanner from "@/components/AdsTerra/AdsBanner";
-import NativeBanner from "@/components/AdsTerra/Native";
 import Benefits from "@/components/Benefits";
 import Discover from "@/components/Discover";
 import Footer from "@/components/Footer";
@@ -40,9 +38,7 @@ export default async function Home({
           {/* SEO CONTENT */}
           <Discover />
         </main>
-        <AdsBanner />
       </div>
-      <NativeBanner />
       <Footer />
     </div>
   );

@@ -10,6 +10,9 @@ export interface ItineraryPlace {
   formattedAddress: string;
   rating?: number;
   photoUrl?: string;
+  editorialSummary?: {
+    text: string;
+  }
   location: {
     lat: number;
     lng: number;
@@ -44,6 +47,7 @@ async function resolveItinerary(city: string, lang: string): Promise<ItineraryRe
       displayName: place.displayName,
       formattedAddress: place.formattedAddress,
       rating: place.rating,
+      editorialSummary: place.editorialSummary,
       photoUrl: place.photos?.[0]?.name ? `/api/imageProxy?photoName=${place.photos[0].name}` : undefined,
       location: {
         lat: place.location.latitude,
