@@ -36,10 +36,6 @@ export async function getTuristicPlaces(city: string, lang: string) {
     }
 
     const data = await response.json();
-    console.log(data.places)
-    data.places.forEach((element: any) => {
-      console.log(element.photos[0].googleMapsUri)
-    });
     return data.places || [];
 
   } catch (error) {
