@@ -22,7 +22,7 @@ export default async function Home({
       { /* CONTEÚDO PRINCIPAL */ }
       <Header />
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <main className="col-span-12 lg:col-span-10 mt-2.5">
+        <main className="col-span-12 mt-2.5">
           <ItineraryGenerator lang={lang} />
           {/* SEÇÃO HERO COM CONTEÚDO */}
           <Hero />
