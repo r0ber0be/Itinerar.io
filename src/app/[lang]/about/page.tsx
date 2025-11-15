@@ -78,7 +78,7 @@ export default function AboutPage({
     <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
       <Header />
       
-      <main className="max-w-4xl mx-auto py-8">
+      <main role="main" className="max-w-4xl mx-auto py-8">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
           {content.title}
         </h1>

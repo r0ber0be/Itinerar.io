@@ -9,7 +9,7 @@ export default function Footer() {
   const lang = pathname.split('/')[1] || 'pt-br';
   
   return (
-    <footer className="text-center py-8 text-sm border-t border-gray-200 dark:border-gray-700 mt-12">
+    <footer role="contentinfo" className="text-center py-8 text-sm border-t border-gray-200 dark:border-gray-700 mt-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-4">
           <Link 

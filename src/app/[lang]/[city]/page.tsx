@@ -5,6 +5,8 @@ import HotTopics from "@/components/HotTopics";
 import MainContent from "@/components/ItineraryDisplay";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
+import ItineraryJsonLd from "@/components/ItineraryJsonLd";
+import { fetchItinerary } from "@/app/actions";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -37,7 +39,7 @@ export async function generateMetadata({
       canonical: pageUrl,
       languages: {
         "pt-br": `${baseUrl}/pt-br/${decodedCity}`,
-        "en": `${baseUrl}/en/${decodedCity}`,
+        en: `${baseUrl}/en/${decodedCity}`,
       }
     },
     openGraph: {
@@ -45,7 +47,7 @@ export async function generateMetadata({
       description,
       url: pageUrl,
       siteName: "Itinerar",
-      locale: "pt-br",
+      locale: lang,
       type: "website",
       images: [
         {
@@ -75,12 +77,14 @@ export default async function Home({
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
 
+  const { places } = await fetchItinerary(city, lang);
   return (
     <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
       { /* CONTEÚDO PRINCIPAL */ }
       <Header />
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <main className="col-span-12 lg:col-span-12 mt-2.5">
+        <main role="main" className="col-span-12 lg:col-span-12 mt-2.5">
+          <ItineraryJsonLd city={capitalizedCity} lang={lang} places={places} />
           <ItineraryGenerator lang={lang} />
           <MainContent city={capitalizedCity} lang={lang} />
           <HotTopics lang={lang} />
