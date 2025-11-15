@@ -34,7 +34,8 @@ export default function Footer() {
           </Link>
         </div>
         
-        <p className="text-gray-500 mb-2">
+        <p className="text-gray-300 dark:text-gray-400 mb-2"
+>
           © {currentYear} Itinerar - {lang === 'en' ? 'All rights reserved' : 'Todos os direitos reservados'}.
         </p>
         

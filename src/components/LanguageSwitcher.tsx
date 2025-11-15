@@ -33,8 +33,8 @@ export default function LanguageSwitcher() {
               href={redirectedPathName(locale)}
               className={
                 currentLang === locale
-                  ? "text-blue-600 font-bold"
-                  : "text-gray-500 hover:text-white transition-colors"
+                  ? "text-blue-600 font-bold dark:text-blue-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
               }
             >
               {localeLabel}
