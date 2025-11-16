@@ -34,6 +34,7 @@ export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city:
               "@type": "AggregateRating",
               ratingValue: place.rating,
               ratingCount: place.userRatingCount,
+              reviewCount: place.userRatingCount,
               bestRating: "5",
             }
           : undefined,
