@@ -76,7 +76,7 @@ export default async function Home({
   const { city, lang } = await params;
   const decodedCity = decodeURIComponent(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-
+  
   const { places } = await fetchItinerary(city, lang);
   return (
     <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">

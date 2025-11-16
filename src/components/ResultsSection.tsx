@@ -123,7 +123,9 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
                   ? <p className="text-sm mt-1">{editorialSummary.text}</p> 
                   : <></>
                 }
-                <p className="text-gray-600 text-xs mt-1">{formattedAddress}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-xs mt-1">
+                  {formattedAddress}
+                </p>
               </div>
             </div>
           )}
