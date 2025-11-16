@@ -20,7 +20,7 @@ export async function generateMetadata({
   params: HomeProps['params']
 }>): Promise<Metadata> {
   const { city, lang } = await params;
-  const decodedCity = decodeURIComponent(city.replace("-", " "));
+  const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
   const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`;
   const description = `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`;
@@ -74,7 +74,7 @@ export default async function Home({
   }>
 ) {
   const { city, lang } = await params;
-  const decodedCity = decodeURIComponent(city.replace("-", " "));
+  const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
   
   const { places } = await fetchItinerary(city, lang);

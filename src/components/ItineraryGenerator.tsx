@@ -18,7 +18,7 @@ export default function ItineraryGenerator({ lang }: Readonly<{ lang: string }>)
     }
 
     else {
-      const formattedCity = city.replace(" ", "-").toLowerCase();
+      const formattedCity = city.replaceAll(" ", "-").toLowerCase();
       router.push(`/${lang}/${formattedCity}`);
     }
   }

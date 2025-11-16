@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "sydney",
     "cidade-do-cabo",
     "amsterdam",
-    "amsterda",
+    "amsterdã",
     "buenos-aires",
     "firenze",
     "orlando",
