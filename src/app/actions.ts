@@ -48,7 +48,7 @@ async function resolveItinerary(city: string, lang: string): Promise<ItineraryRe
       displayName: place.displayName,
       formattedAddress: place.formattedAddress,
       rating: place.rating,
-      userRaingCount: place.userRatingCount,
+      userRatingCount: place.userRatingCount,
       editorialSummary: place.editorialSummary,
       photoUrl: place.photos?.[0]?.name ? `/api/imageProxy?photoName=${place.photos[0].name}` : undefined,
       location: {
