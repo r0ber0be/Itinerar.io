@@ -34,12 +34,12 @@ export default function Footer() {
           </Link>
         </div>
         
-        <p className="text-gray-300 dark:text-gray-400 mb-2"
+        <p className="text-black dark:text-gray-400 mb-2"
 >
           © {currentYear} Itinerar - {lang === 'en' ? 'All rights reserved' : 'Todos os direitos reservados'}.
         </p>
         
-        <div className="text-xs text-gray-400">Unleashed Giants</div>
+        <div className="text-xs text-black dark:text-gray-400">Unleashed Giants</div>
       </div>
     </footer>
   )

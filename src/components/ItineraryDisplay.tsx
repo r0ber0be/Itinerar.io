@@ -16,7 +16,7 @@ export default async function MainContent({ city, lang }: Readonly<MainContentPr
     }
   } else if (Number(city.length) > 2) {
     itineraryResult = await fetchItinerary(city.toLowerCase(), lang);
-    console.log(itineraryResult)
+    // console.log(itineraryResult)
   } else {
     itineraryResult = {
       places: [],
