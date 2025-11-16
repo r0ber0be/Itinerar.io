@@ -29,6 +29,10 @@ export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city:
             addressLocality: city,
             addressCountry: "BR",
           },
+          containedInPlace: {
+            "@type": "City",
+            name: city
+          },
           aggregateRating: place.rating
             ? {
               "@type": "AggregateRating",
