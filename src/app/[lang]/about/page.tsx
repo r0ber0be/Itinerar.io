@@ -1,17 +1,18 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { Locale } from "@/i18nConfig";
 import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ lang: string }>;
+};
 
 export const metadata: Metadata = {
   title: "Sobre o Itinerar",
   description: "Conheça o Itinerar - sua plataforma de roteiros de viagem personalizados",
 };
 
-export default function AboutPage({
-  params: { lang },
-}: Readonly<{ params: { lang: Locale }}>) {
-  
+export default async function AboutPage({
+  params,
+}: Readonly<{ params: Props['params']}>) {
+  const lang = (await params).lang;
   const content = lang === 'en' ? {
     title: "About Itinerar",
     lastUpdated: "Last updated: October 2025",
@@ -75,32 +76,26 @@ export default function AboutPage({
   };
 
   return (
-    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
-      <Header />
-      
-      <main role="main" className="max-w-4xl mx-auto py-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          {content.title}
-        </h1>
-        <p className="text-gray-600 dark:text-gray-300 mb-8">
-          {content.lastUpdated}
-        </p>
+    <>
+      <h1 className="text-3xl md:text-4xl font-bold mb-4">
+        {content.title}
+      </h1>
+      <p className="text-gray-600 dark:text-gray-300 mb-8">
+        {content.lastUpdated}
+      </p>
 
-        <div className="space-y-8">
-          {content.sections.map((section) => (
-            <section key={section.id}>
-              <h2 className="text-2xl font-semibold mb-3">
-                {section.title}
-              </h2>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                {section.content}
-              </p>
-            </section>
-          ))}
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+      <div className="space-y-8">
+        {content.sections.map((section) => (
+          <section key={section.id}>
+            <h2 className="text-2xl font-semibold mb-3">
+              {section.title}
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+              {section.content}
+            </p>
+          </section>
+        ))}
+      </div>
+    </>
   );
 }

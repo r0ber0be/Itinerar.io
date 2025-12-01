@@ -1,11 +1,8 @@
 import Benefits from "@/components/Benefits";
 import Discover from "@/components/Discover";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import HotTopics from "@/components/HotTopics";
 import HowItWorks from "@/components/HowItWorks";
-import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { Locale } from "@/i18nConfig";
 
 type HomeProps = {
@@ -18,28 +15,16 @@ export default async function Home({
   const { lang } = await params;
 
   return (
-    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
-      { /* CONTEÚDO PRINCIPAL */ }
-      <Header />
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <main role="main" className="col-span-12 mt-2.5">
-          <ItineraryGenerator lang={lang} />
-          {/* SEÇÃO HERO COM CONTEÚDO */}
-          <Hero />
-
-          {/* COMO FUNCIONA */}
-          <HowItWorks />
-
-          {/* LOCAIS POPULARES */}
-          <HotTopics lang={lang} />
-          {/* BENEFÍCIOS */}
-          <Benefits />
-
-          {/* SEO CONTENT */}
-          <Discover />
-        </main>
-      </div>
-      <Footer />
-    </div>
+    <>
+      <Hero />
+      {/* COMO FUNCIONA */}
+      <HowItWorks />
+      {/* LOCAIS POPULARES */}
+      <HotTopics lang={lang} />
+      {/* BENEFÍCIOS */}
+      <Benefits />
+      {/* SEO */}
+      <Discover />
+    </>
   );
 }

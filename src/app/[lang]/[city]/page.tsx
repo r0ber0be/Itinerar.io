@@ -22,7 +22,7 @@ export async function generateMetadata({
   const { city, lang } = await params;
   const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-  const title = `Roteiro de viagem em ${capitalizedCity} - Pontos turísticos e atrações imperdíveis`;
+  const title = `Roteiro de viagem em ${capitalizedCity}`;
   const description = `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`;
   const pageUrl = `${baseUrl}/${lang}/${decodedCity}`;
   const imageUrl = `${baseUrl}/assets/og-image.png`;
@@ -79,18 +79,11 @@ export default async function Home({
   
   const { places } = await fetchItinerary(city, lang);
   return (
-    <div className="font-sans w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 min-h-screen grid grid-rows-[auto_1fr_auto] gap-4">
-      { /* CONTEÚDO PRINCIPAL */ }
-      <Header />
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <main role="main" className="col-span-12 lg:col-span-12 mt-2.5">
-          <ItineraryJsonLd city={capitalizedCity} lang={lang} places={places} />
-          <ItineraryGenerator lang={lang} />
-          <MainContent city={capitalizedCity} lang={lang} />
-          <HotTopics lang={lang} />
-        </main>
-      </div>
-      <Footer />
-    </div>
+    <>
+      <ItineraryJsonLd city={capitalizedCity} lang={lang} places={places} />
+      
+      <MainContent city={capitalizedCity} lang={lang} />
+      <HotTopics lang={lang} />
+    </>
   );
 }

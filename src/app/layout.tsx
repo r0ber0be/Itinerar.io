@@ -76,7 +76,6 @@ export const metadata: Metadata = {
 };
 
 
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -104,8 +103,8 @@ export default async function RootLayout({
               crossOrigin="anonymous"
             />
           </>
-        ) : null
-      }
+          ) : null
+        }
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}

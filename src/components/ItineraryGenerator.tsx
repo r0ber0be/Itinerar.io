@@ -11,7 +11,6 @@ export default function ItineraryGenerator({ lang }: Readonly<{ lang: string }>)
   function handleSearch(formData: FormData) {
     const query = formData.get("q");
     const city = typeof query === "string" ? query.trim() : "";
-    console.log("Query", city)
 
     if (Number(city.length) > 60) {
       setError('O nome da cidade não pode ter mais de 60 caracteres.'); // Para a execução, não faz a busca

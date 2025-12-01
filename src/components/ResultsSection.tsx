@@ -70,7 +70,6 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
           } : undefined;
 
           const { id, photoUrl, displayName, rating, editorialSummary, formattedAddress } = place;
-          console.log('result', editorialSummary)
           return (
             <div key={id} className="relative border rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
               { isStartingPoint && (
