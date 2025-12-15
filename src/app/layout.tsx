@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   applicationName: "Itinerar",
   description,
   category: "travel",
-  keywords: ["roteiro de viagem", "turismo", "pontos turísticos", "viagem", "destinos", "atrações turísticas"],
+  keywords: ["roteiro de viagem", "turismo", "pontos turísticos", "viagem", "destinos", "atrações turísticas", "o que fazer", "passeio", "roteiro", "turístico"],
   authors: [{ name: "Robson Lopes Cavalcante", url: "https://www.linkedin.com/in/robson-lopesc/" }],
   verification: {
     me: "https://www.linkedin.com/in/robson-lopesc/",
@@ -74,7 +74,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
 
 export default async function RootLayout({
   children,

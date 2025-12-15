@@ -1,12 +1,9 @@
 import { Metadata } from "next";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import HotTopics from "@/components/HotTopics";
-import MainContent from "@/components/ItineraryDisplay";
-import ItineraryGenerator from "@/components/ItineraryGenerator";
 import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 import ItineraryJsonLd from "@/components/ItineraryJsonLd";
 import { fetchItinerary } from "@/app/actions";
+import ResultsSection from "@/components/ResultsSection";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -77,12 +74,12 @@ export default async function Home({
   const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
   
-  const { places } = await fetchItinerary(city, lang);
+  const itineraryResult = await fetchItinerary(city, lang);
+  const { places } = itineraryResult
   return (
     <>
       <ItineraryJsonLd city={capitalizedCity} lang={lang} places={places} />
-      
-      <MainContent city={capitalizedCity} lang={lang} />
+      <ResultsSection state={itineraryResult} searchedCity={city} />
       <HotTopics lang={lang} />
     </>
   );

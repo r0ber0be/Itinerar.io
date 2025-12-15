@@ -37,6 +37,12 @@ export interface ItineraryResult {
 
 async function resolveItinerary(city: string, lang: string): Promise<ItineraryResult> {
   try {
+    if(Number(city.length) > 60) {
+      return {
+        places: [],
+        error: "O nome da cidade é muito longo. Por favor, use no máximo 60 caracteres.",
+      }
+    }
     const placesFromAPI = await getTuristicPlaces(city, lang);
 
     if (!placesFromAPI || placesFromAPI.length === 0) {
