@@ -10,7 +10,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
 export const revalidate = 259200;
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return [];
 }
 
