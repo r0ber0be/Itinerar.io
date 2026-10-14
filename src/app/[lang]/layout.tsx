@@ -1,9 +1,13 @@
-import { Locale } from "@/i18nConfig";
+import { i18n, Locale } from "@/i18nConfig";
 import { TranslationProvider } from "@/components/providers/TranslationProvider";
 import { getDictionary } from "@/lib/getDictionary";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ItineraryGenerator from "@/components/ItineraryGenerator";
+
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }));
+}
 
 type Props = {
   children: React.ReactNode;

@@ -4,10 +4,28 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Sobre o Itinerar",
-  description: "Conheça o Itinerar - sua plataforma de roteiros de viagem personalizados",
-};
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
+export async function generateMetadata({
+  params,
+}: Readonly<{ params: Props['params']}>): Promise<Metadata> {
+  const lang = (await params).lang;
+
+  return {
+    title: lang === 'en' ? "About Itinerar" : "Sobre o Itinerar",
+    description: lang === 'en'
+      ? "Get to know Itinerar - your platform for personalized travel itineraries"
+      : "Conheça o Itinerar - sua plataforma de roteiros de viagem personalizados",
+    alternates: {
+      canonical: `${baseUrl}/${lang}/about`,
+      languages: {
+        "pt-br": `${baseUrl}/pt-br/about`,
+        en: `${baseUrl}/en/about`,
+        "x-default": `${baseUrl}/pt-br/about`,
+      },
+    },
+  };
+}
 
 export default async function AboutPage({
   params,

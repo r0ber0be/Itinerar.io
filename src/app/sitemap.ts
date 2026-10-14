@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["pt-br", "en"];
 
   const hotTopicsCities = [
@@ -13,7 +13,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const mostSearchedCities = [
     "new-york",
-    "nova-iorque",
     "londres",
     "toquio",
     "sao-paulo",
@@ -26,9 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "sydney",
     "cidade-do-cabo",
     "amsterdam",
-    "amsterdã",
     "buenos-aires",
-    "firenze",
     "orlando",
     "miami",
     "cancun",
@@ -62,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "singapura",
     "kuala-lumpur",
     "bali",
-    "hanói",
+    "hanoi",
     "siem-reap",
     "delhi",
     "mumbai",
@@ -108,6 +105,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date().toISOString(),
       changeFrequency: "monthly",
       priority: 0.8,
+      alternates: {
+        languages: {
+          "pt-br": `${baseUrl}/pt-br/${citySlug}`,
+          en: `${baseUrl}/en/${citySlug}`,
+          "x-default": `${baseUrl}/pt-br/${citySlug}`,
+        }
+      }
     }))
   );
 
@@ -119,9 +123,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
       alternates: {
         languages: {
-          "pt-br": `${baseUrl}/pt-br`,
+          "pt-br": `${baseUrl}`,
           en: `${baseUrl}/en`,
-          "x-default": `${baseUrl}/pt-br`,
+          "x-default": `${baseUrl}`,
+        }
+      }
+    },
+    {
+      url: `${baseUrl}/en`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 1,
+      alternates: {
+        languages: {
+          "pt-br": `${baseUrl}`,
+          en: `${baseUrl}/en`,
+          "x-default": `${baseUrl}`,
         }
       }
     },

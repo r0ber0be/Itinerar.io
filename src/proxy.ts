@@ -4,6 +4,29 @@ import type { NextRequest } from "next/server";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { i18n } from "@/i18nConfig";
+import { cityNameFromSlug, toCitySlug } from "@/helpers/citySlug";
+
+const NON_CITY_PAGES = new Set(["about", "privacy"]);
+
+// Feito aqui e não na página porque o loading.tsx da rota de cidade faz streaming,
+// e aí o redirect sairia como meta refresh com status 200 em vez de 308.
+function getCanonicalCityPath(pathname: string) {
+  const [, lang, city, ...rest] = pathname.split("/");
+
+  if (!city || rest.length > 0 || NON_CITY_PAGES.has(city)) return null;
+
+  let decodedCity: string;
+  try {
+    decodedCity = decodeURIComponent(city);
+  } catch {
+    return null;
+  }
+
+  const citySlug = toCitySlug(cityNameFromSlug(city));
+  if (decodedCity === citySlug) return null;
+
+  return `/${lang}/${encodeURIComponent(citySlug)}`;
+}
 
 function getLocale(request: NextRequest): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
@@ -31,7 +54,14 @@ export function proxy(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameHasLocale) return;
+  if (pathnameHasLocale) {
+    const canonicalCityPath = getCanonicalCityPath(pathname);
+    if (!canonicalCityPath) return;
+
+    const url = request.nextUrl.clone();
+    url.pathname = canonicalCityPath;
+    return NextResponse.redirect(url, 308);
+  }
 
   const locale = getLocale(request);
 

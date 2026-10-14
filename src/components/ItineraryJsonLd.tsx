@@ -1,13 +1,16 @@
 import Script from "next/script";
 import { TouristTrip, WithContext } from "schema-dts";
+import { toCitySlug } from "@/helpers/citySlug";
 
 export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city: string; lang: string; places: any[] }>) {
   const jsonLd: WithContext<TouristTrip> = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    name: `Roteiro de viagem para ${city}`,
-    description: `Descubra os principais pontos turísticos de ${city}, com atrações, locais históricos e experiências imperdíveis.`,
-    url: `https://itinerar.com.br/${lang}/${encodeURIComponent(city.toLowerCase())}`,
+    name: lang === "en" ? `${city} travel itinerary` : `Roteiro de viagem para ${city}`,
+    description: lang === "en"
+      ? `Discover the top tourist attractions in ${city}, with sights, historic places and must-see experiences.`
+      : `Descubra os principais pontos turísticos de ${city}, com atrações, locais históricos e experiências imperdíveis.`,
+    url: `https://itinerar.com.br/${lang}/${encodeURIComponent(toCitySlug(city))}`,
     itinerary: {
       "@type": "ItemList",
       itemListElement: places.map((place, index) => ({

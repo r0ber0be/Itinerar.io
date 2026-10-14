@@ -4,10 +4,28 @@ type Props = {
   params: Promise<{ lang: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Política de Privacidade",
-  description: "Política de privacidade do Itinerar - Como coletamos e protegemos seus dados",
-};
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
+export async function generateMetadata({
+  params,
+}: Readonly<{ params: Props['params']}>): Promise<Metadata> {
+  const lang = (await params).lang;
+
+  return {
+    title: lang === 'en' ? "Privacy Policy" : "Política de Privacidade",
+    description: lang === 'en'
+      ? "Itinerar privacy policy - How we collect and protect your data"
+      : "Política de privacidade do Itinerar - Como coletamos e protegemos seus dados",
+    alternates: {
+      canonical: `${baseUrl}/${lang}/privacy`,
+      languages: {
+        "pt-br": `${baseUrl}/pt-br/privacy`,
+        en: `${baseUrl}/en/privacy`,
+        "x-default": `${baseUrl}/pt-br/privacy`,
+      },
+    },
+  };
+}
 
 export default async function PrivacyPolicy({
   params,
