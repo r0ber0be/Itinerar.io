@@ -1,23 +1,19 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import React from "react"
 import { i18n } from "@/i18nConfig"
 
 export default function LanguageSwitcher() {
   const pathName = usePathname()
-  const searchParams = useSearchParams()
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/"
     
     const segments = pathName.split("/")
     segments[1] = locale
-    const newPath = segments.join("/")
-    const paramsString = searchParams.toString()
-
-    return paramsString ? `${newPath}?${paramsString}` : newPath
+    return segments.join("/")
   }
 
   const currentLang = pathName.split("/")[1]

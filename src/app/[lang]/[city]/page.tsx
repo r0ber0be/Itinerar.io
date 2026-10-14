@@ -4,8 +4,15 @@ import { capitalizeFirstLetterOfCity } from "@/helpers/captalizeAllFirstWord";
 import ItineraryJsonLd from "@/components/ItineraryJsonLd";
 import { fetchItinerary } from "@/app/actions";
 import ResultsSection from "@/components/ResultsSection";
+import { cityNameFromSlug, toCitySlug } from "@/helpers/citySlug";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
+export const revalidate = 259200;
+
+export async function generateStaticParams() {
+  return [];
+}
 
 type HomeProps = {
   params: Promise<{ city: string, lang: string }>;
@@ -17,11 +24,16 @@ export async function generateMetadata({
   params: HomeProps['params']
 }>): Promise<Metadata> {
   const { city, lang } = await params;
-  const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
+  const decodedCity = cityNameFromSlug(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-  const title = `Roteiro de viagem em ${capitalizedCity}`;
-  const description = `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`;
-  const pageUrl = `${baseUrl}/${lang}/${decodedCity}`;
+  const citySlug = toCitySlug(decodedCity);
+  const title = lang === "en"
+    ? `${capitalizedCity} travel itinerary`
+    : `Roteiro de viagem em ${capitalizedCity}`;
+  const description = lang === "en"
+    ? `Explore ${capitalizedCity} with a personalized itinerary, including tourist attractions, travel tips and cultural sights. Plan your trip with ease.`
+    : `Explore ${capitalizedCity} com um roteiro personalizado, incluindo pontos turísticos, dicas de viagem e atrações culturais. Planeje sua viagem com facilidade.`;
+  const pageUrl = `${baseUrl}/${lang}/${citySlug}`;
   const imageUrl = `${baseUrl}/assets/og-image.png`;
 
   return {
@@ -35,8 +47,9 @@ export async function generateMetadata({
     alternates: {
       canonical: pageUrl,
       languages: {
-        "pt-br": `${baseUrl}/pt-br/${decodedCity}`,
-        en: `${baseUrl}/en/${decodedCity}`,
+        "pt-br": `${baseUrl}/pt-br/${citySlug}`,
+        en: `${baseUrl}/en/${citySlug}`,
+        "x-default": `${baseUrl}/pt-br/${citySlug}`,
       }
     },
     openGraph: {
@@ -44,7 +57,7 @@ export async function generateMetadata({
       description,
       url: pageUrl,
       siteName: "Itinerar",
-      locale: lang,
+      locale: lang === "en" ? "en_US" : "pt_BR",
       type: "website",
       images: [
         {
@@ -71,9 +84,9 @@ export default async function Home({
   }>
 ) {
   const { city, lang } = await params;
-  const decodedCity = decodeURIComponent(city.replaceAll("-", " "));
+  const decodedCity = cityNameFromSlug(city);
   const capitalizedCity = capitalizeFirstLetterOfCity(decodedCity);
-  
+
   const itineraryResult = await fetchItinerary(city, lang);
   const { places } = itineraryResult
   return (
