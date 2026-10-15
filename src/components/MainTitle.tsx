@@ -9,13 +9,13 @@ export default function MainTitle() {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const [reduceMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true
+  );
   const dictionary = useTranslation();
 
   useEffect(() => {
-    if (index >= words.length) {
-      setIndex(0);
-      return;
-    }
+    if (reduceMotion) return;
 
     if (subIndex === words[index].length + 1 && !deleting) {
       setTimeout(() => setDeleting(true), 3000); // pausa antes de apagar
@@ -36,13 +36,15 @@ export default function MainTitle() {
   }, [subIndex, index, deleting]);
 
   useEffect(() => {
-    setCurrentWord(words[index].substring(0, subIndex));
+    setCurrentWord(reduceMotion ? words[index] : words[index].substring(0, subIndex));
   }, [subIndex, index]);
 
   return (
-    <h1 className="text-3xl md:text-5xl mt-3 mb-2">
+    <h1 className="text-3xl md:text-5xl mt-3 mb-2 break-words">
       { dictionary.mainTitle } {` `}
-      <span className="text-blue-400 border-r-2 border-blue-400 pr-1">{currentWord}</span>
+      {/* A digitação muda o texto a cada 150ms; o leitor de tela recebe a lista estática. */}
+      <span className="sr-only">{words.join(", ")}</span>
+      <span aria-hidden="true" className="text-blue-700 border-r-2 border-blue-700 dark:text-blue-400 dark:border-blue-400 pr-1">{currentWord}</span>
     </h1>
   )
 }

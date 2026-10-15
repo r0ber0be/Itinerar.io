@@ -9,7 +9,7 @@ export default function SearchButton() {
     <div className="grid place-items-center w-full">
       <button
         type="submit"
-        className="rounded-2xl px-6 py-3 w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer"
+        className="rounded-2xl px-6 py-3 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-400"
       >
         {dictionary.searchButton}
       </button>

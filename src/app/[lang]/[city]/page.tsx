@@ -92,7 +92,7 @@ export default async function Home({
   return (
     <>
       <ItineraryJsonLd city={capitalizedCity} lang={lang} places={places} />
-      <ResultsSection state={itineraryResult} searchedCity={city} />
+      <ResultsSection state={itineraryResult} searchedCity={capitalizedCity} />
       <HotTopics lang={lang} />
     </>
   );

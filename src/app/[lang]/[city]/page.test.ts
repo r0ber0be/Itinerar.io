@@ -57,6 +57,16 @@ describe("city page", () => {
 
     expect(fetchItinerary).toHaveBeenCalledWith("new-york", "en");
     expect(jsonLd.props).toMatchObject({ city: "New York", lang: "en", places: [] });
-    expect(results.props).toMatchObject({ searchedCity: "new-york" });
+    expect(results.props).toMatchObject({ searchedCity: "New York" });
+  });
+
+  it.each([
+    ["paris", "Paris"],
+    ["s%C3%A3o-paulo", "São Paulo"],
+  ])("shows the searched city %s as %s in the results heading", async (slug, cityName) => {
+    const page = await Home({ params: params(slug, "pt-br") }) as ReactElement<{ children: ReactElement<Record<string, unknown>>[] }>;
+    const [, results] = page.props.children;
+
+    expect(results.props).toMatchObject({ searchedCity: cityName });
   });
 });

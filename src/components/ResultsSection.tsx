@@ -16,14 +16,14 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
   const dictionary = useTranslation();
 
   const googleMapsUrl = useMemo(() => {
-    if (!places || places.length < 2) {
+    if (places.length < 2) {
       return '';
     }
 
     const baseUrl = 'https://www.google.com/maps/dir/';
 
     const origin = `origin=${encodeURIComponent(places[0].formattedAddress)}`;
-    const destination = `destination=${encodeURIComponent(places?.at(-1)!.formattedAddress)}`;
+    const destination = `destination=${encodeURIComponent(places.at(-1)!.formattedAddress)}`;
 
     const waypoints = places
       .slice(1, -1)
@@ -34,17 +34,17 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
   }, [places]);
 
   if (state.error) {
-    return <p className="text-center text-red-500 mt-4">{state.error}</p>;
+    return <p role="alert" className="text-center text-red-700 dark:text-red-400 mt-4">{state.error}</p>;
   }
 
-  if (!places || places.length === 0) {
+  if (places.length === 0) {
     return null;
   }
 
   return (
-    <div className="container mx-auto p-4 mt-3">
-      <h2 className="text-2xl font-bold mb-4">
-        {dictionary.itineraryFor} <span className="text-blue-400">{searchedCity}</span>
+    <section aria-labelledby="results-title" className="container mx-auto px-0 py-4 md:p-4 mt-3">
+      <h2 id="results-title" className="text-2xl font-bold mb-4 break-words">
+        {dictionary.itineraryFor} <span className="text-blue-700 dark:text-blue-400">{searchedCity}</span>
       </h2>
 
       { googleMapsUrl && (
@@ -52,14 +52,15 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
           href={googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-bold my-4 py-3 px-6 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-3 text-lg"
+          className="bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-bold my-4 py-3 px-6 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center gap-3 text-base md:text-lg text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
         >
           <PinSVG />
           {dictionary.openGoogleMapsButton}
+          <span className="sr-only">{dictionary.opensInNewTab}</span>
         </a>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         { places.map((place, index) => {
           const isStartingPoint = index === 0;
           const isFinalPoint = index === places.length - 1;
@@ -71,23 +72,25 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
 
           const { id, photoUrl, displayName, rating, editorialSummary, formattedAddress } = place;
           return (
-            <div key={id} className="relative border rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105">
+            <li key={id} className="relative border rounded-lg overflow-hidden shadow-lg transition-transform motion-safe:hover:scale-105">
               { isStartingPoint && (
-                <div className="absolute top-2 left-2 bg-green-500 text-xs font-bold p-2 rounded-lg z-10">
+                <div className="absolute top-2 left-2 bg-green-700 text-white text-xs font-bold p-2 rounded-lg z-10">
                   { dictionary.startPoint }
                 </div>
               )}
 
               { isFinalPoint && !isStartingPoint && (
-                <div className="absolute top-2 right-2 bg-red-500 text-xs font-bold p-2 rounded-lg z-10">
+                <div className="absolute top-2 right-2 bg-red-700 text-white text-xs font-bold p-2 rounded-lg z-10">
                   { dictionary.endPoint }
                 </div>
               )}
-              
+
               { legInfo && (
-                <div className="absolute top-2 left-2 p-2 text-xs bg-blue-500 rounded-lg z-40">
+                <div className="absolute top-2 left-2 p-2 text-xs bg-blue-700 text-white rounded-lg z-40">
                   <p className="font-semibold">
-                    {'<-'} {legInfo.duration} ({legInfo.distance})
+                    <span aria-hidden="true">{'<-'}</span>
+                    <span className="sr-only">{dictionary.fromPreviousStop}</span>
+                    {' '}{legInfo.duration} ({legInfo.distance})
                   </p>
                 </div>
               )}
@@ -97,11 +100,14 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
                   <img
                     src={photoUrl}
                     alt={displayName.text}
+                    width={400}
+                    height={192}
+                    loading={index < 3 ? "eager" : "lazy"}
                     className="w-full h-48 object-cover"
                   />
                 ) : (
                   <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-500">
+                    <span className="text-gray-700">
                       { dictionary.imageUnavailable }
                     </span>
                   </div>
@@ -109,7 +115,8 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
 
                 { rating &&
                   <div className="absolute right-4 bottom-1 z-20">
-                    <p className="text-xl font-bold p-2 grid grid-flow-col auto-cols-max items-center gap-1">
+                    <p className="text-xl font-bold p-2 grid grid-flow-col auto-cols-max items-center gap-1 rounded-lg bg-black/60 text-white">
+                      <span className="sr-only">{dictionary.rating}:</span>
                       {rating} <StarSVG />
                     </p>
                   </div>
@@ -117,19 +124,19 @@ export default function ResultsSection({ state, searchedCity }: Readonly<Results
               </div>
 
               <div className="relative p-4">
-                <h3 className="font-bold text-lg">{displayName.text}</h3>
-                { editorialSummary 
-                  ? <p className="text-sm mt-1">{editorialSummary.text}</p> 
+                <h3 className="font-bold text-lg break-words">{displayName.text}</h3>
+                { editorialSummary
+                  ? <p className="text-sm mt-1">{editorialSummary.text}</p>
                   : <></>
                 }
-                <p className="text-gray-600 dark:text-gray-300 text-xs mt-1">
+                <p className="text-gray-700 dark:text-gray-300 text-xs mt-1 break-words">
                   {formattedAddress}
                 </p>
               </div>
-            </div>
+            </li>
           )}
         )}
-      </div>
-    </div>
+      </ol>
+    </section>
   );
 }

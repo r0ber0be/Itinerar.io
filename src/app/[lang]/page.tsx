@@ -5,6 +5,7 @@ import HotTopics from "@/components/HotTopics";
 import HowItWorks from "@/components/HowItWorks";
 import { Locale } from "@/i18nConfig";
 import { Metadata } from "next";
+import { WebSite, WithContext } from "schema-dts";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
@@ -68,9 +69,21 @@ export default async function Home({
   params,
 }: Readonly<{ params: HomeProps['params']}>) {
   const { lang } = await params;
+  // O Google usa o nome do WebSite da home como nome do site nos resultados, no lugar do domínio.
+  const webSiteJsonLd: WithContext<WebSite> = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Itinerar",
+    alternateName: "itinerar.com.br",
+    url: `${baseUrl}/`,
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
+      />
       <Hero />
       {/* COMO FUNCIONA */}
       <HowItWorks />

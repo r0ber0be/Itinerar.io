@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { proxy } from "./proxy";
 
@@ -44,5 +44,21 @@ describe("proxy", () => {
     const response = run("/paris", { "accept-language": "fr-FR" });
 
     expect(response?.headers.get("x-middleware-rewrite")).toBe("https://itinerar.com.br/pt-br/paris");
+  });
+
+  it("falls back to pt-br when the locale matcher rejects the browser language", () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const response = run("/paris", { "accept-language": "*" });
+
+    expect(response?.headers.get("x-middleware-rewrite")).toBe("https://itinerar.com.br/pt-br/paris");
+    expect(consoleError).toHaveBeenCalledOnce();
+    consoleError.mockRestore();
+  });
+
+  it("rewrites the bare root to the home of the browser language", () => {
+    const response = run("/", { "accept-language": "pt-BR" });
+
+    expect(response?.headers.get("x-middleware-rewrite")).toBe("https://itinerar.com.br/pt-br/");
   });
 });
