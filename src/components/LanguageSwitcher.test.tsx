@@ -22,8 +22,10 @@ describe("LanguageSwitcher", () => {
 
     const html = renderToStaticMarkup(<LanguageSwitcher />);
 
-    expect(html).toMatch(/<a[^>]*hrefLang="en"[^>]*lang="en"[^>]*aria-label="English"[^>]*aria-current="page"/);
-    expect(html).toMatch(/<a[^>]*hrefLang="pt-br"[^>]*lang="pt-br"[^>]*aria-label="Português"(?![^>]*aria-current)[^>]*>/);
+    expect(html).toMatch(/<a[^>]*hrefLang="en"[^>]*lang="en"[^>]*aria-current="page"[^>]*>EN<span class="sr-only"> \(English\)<\/span><\/a>/);
+    expect(html).toMatch(/<a[^>]*hrefLang="pt-br"[^>]*lang="pt-br"(?![^>]*aria-current)[^>]*>BR<span class="sr-only"> \(Português\)<\/span><\/a>/);
+    // WCAG 2.5.3: o nome acessível precisa conter o texto visível, então não pode haver aria-label.
+    expect(html).not.toContain("aria-label");
     expect(html).toContain('<div aria-hidden="true"');
   });
 
