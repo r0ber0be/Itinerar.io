@@ -1,8 +1,9 @@
 import Script from "next/script";
 import { TouristTrip, WithContext } from "schema-dts";
 import { toCitySlug } from "@/helpers/citySlug";
+import type { ItineraryPlace } from "@/app/actions";
 
-export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city: string; lang: string; places: any[] }>) {
+export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city: string; lang: string; places: ItineraryPlace[] }>) {
   const jsonLd: WithContext<TouristTrip> = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
@@ -20,17 +21,17 @@ export default function ItineraryJsonLd({ city, lang, places }: Readonly<{ city:
           "@type": "TouristAttraction",
           name: place.displayName?.text,
           description: place.editorialSummary?.text,
-          image: place.photos?.[0]?.photoUrl,
+          image: place.photoUrl ? `https://itinerar.com.br${place.photoUrl}` : undefined,
           geo: {
             "@type": "GeoCoordinates",
-            latitude: place.location.latitude,
-            longitude: place.location.longitude,
+            latitude: place.location.lat,
+            longitude: place.location.lng,
           },
           address: {
             "@type": "PostalAddress",
             streetAddress: place.formattedAddress,
             addressLocality: city,
-            addressCountry: "BR",
+            addressCountry: place.countryCode,
           },
           containedInPlace: {
             "@type": "City",

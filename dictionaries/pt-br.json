@@ -8,6 +8,10 @@
   "startPoint": "Ponto de Partida",
   "endPoint": "Ponto Final",
   "imageUnavailable": "Imagem não disponível",
+  "skipToContent": "Pular para o conteúdo",
+  "opensInNewTab": "(abre em nova aba)",
+  "rating": "Avaliação",
+  "fromPreviousStop": "Desde o ponto anterior:",
   "hero": {
     "title": "Planeje sua viagem perfeita",
     "subtitle": "Descubra os melhores pontos turísticos e crie roteiros de viagem personalizados para qualquer destino do mundo."

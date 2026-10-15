@@ -12,6 +12,10 @@ type Dictionary = {
   startPoint: string;
   endPoint: string;
   imageUnavailable: string;
+  skipToContent: string;
+  opensInNewTab: string;
+  rating: string;
+  fromPreviousStop: string;
   hero: {
     title: string;
     subtitle: string;

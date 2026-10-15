@@ -7,7 +7,7 @@ export default function Header() {
     <header role="banner" className="grid w-full mt-2.5">
       <div className="grid grid-cols-2 items-start">
         <Logo />
-        <nav role="navigation" className="justify-self-end">
+        <nav aria-label="Idioma / Language" className="justify-self-end">
           <LanguageSwitcher />
         </nav>
       </div>

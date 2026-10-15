@@ -24,9 +24,9 @@ export default function ItineraryGenerator({ lang }: Readonly<{ lang: string }>)
 
   return (
     <section className="w-full">
-      <form action={handleSearch}>
+      <form action={handleSearch} role="search">
         <SearchSection />
-        { error && <p className="text-red-500 mt-2 text-center">{ error }</p> }
+        { error && <p role="alert" className="text-red-700 dark:text-red-400 mt-2 text-center">{ error }</p> }
       </form>
     </section>
   );

@@ -28,7 +28,7 @@ type HotTopicsProps = {
   lang?: string;
 };
 
-export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps> = {}) {
+export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps>) {
   const dictionary = useTranslation();
   const params = useParams<{ lang?: string | string[] }>();
 
@@ -48,7 +48,7 @@ export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps> =
           <Link
             key={topic.city}
             href={`/${lang}/${encodeURIComponent(topic.city.toLowerCase())}`}
-            className="card rounded-2xl cursor-pointer overflow-hidden block transition-transform hover:scale-105"
+            className="card rounded-2xl cursor-pointer overflow-hidden block transition-transform motion-safe:hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-400"
             prefetch={true}
           >
             <div className="card rounded-2xl cursor-pointer overflow-hidden">

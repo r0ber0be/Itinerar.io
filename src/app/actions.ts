@@ -18,6 +18,12 @@ export interface ItineraryPlace {
     lat: number;
     lng: number;
   };
+  countryCode?: string;
+}
+
+interface AddressComponent {
+  shortText: string;
+  types: string[];
 }
 
 interface Leg {
@@ -61,6 +67,9 @@ async function resolveItinerary(city: string, lang: string): Promise<ItineraryRe
         lat: place.location.latitude,
         lng: place.location.longitude,
       },
+      countryCode: place.addressComponents
+        ?.find((component: AddressComponent) => component.types.includes("country"))
+        ?.shortText,
     }));
 
     let legs: Leg[] | undefined = undefined;

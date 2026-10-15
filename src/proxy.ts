@@ -66,7 +66,7 @@ export function proxy(request: NextRequest) {
   const locale = getLocale(request);
 
   return NextResponse.rewrite(
-    new URL(`/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`, request.url)
+    new URL(`/${locale}${pathname}`, request.url)
   );
 }
 

@@ -8,6 +8,10 @@
   "startPoint": "Starting Point",
   "endPoint": "End Point",
   "imageUnavailable": "Image Unavailable",
+  "skipToContent": "Skip to main content",
+  "opensInNewTab": "(opens in a new tab)",
+  "rating": "Rating",
+  "fromPreviousStop": "From the previous stop:",
   "hero": {
     "title": "Plan your perfect trip",
     "subtitle": "Discover the best tourist attractions and create personalized travel itineraries for any destination in the world."

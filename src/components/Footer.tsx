@@ -16,7 +16,7 @@ export default function Footer() {
             href={`/${lang}`}
             className="hover:text-blue-500 transition-colors"
           >
-            {lang === 'en' ? 'Home' : 'Inicío'}
+            {lang === 'en' ? 'Home' : 'Início'}
           </Link>
           <span className="hidden md:inline">•</span>
           <Link 

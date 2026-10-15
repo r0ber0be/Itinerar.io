@@ -1,5 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { generateMetadata } from "./page";
+import type { ReactElement } from "react";
+import Home, { generateMetadata } from "./page";
+
+describe("home page", () => {
+  it("publishes the WebSite structured data so Google shows the site name", async () => {
+    const page = await Home({ params: Promise.resolve({ lang: "pt-br" }) }) as ReactElement<{ children: ReactElement<{ type?: string; dangerouslySetInnerHTML?: { __html: string } }>[] }>;
+    const [script] = page.props.children;
+
+    expect(script.type).toBe("script");
+    expect(script.props.type).toBe("application/ld+json");
+    expect(JSON.parse(script.props.dangerouslySetInnerHTML!.__html)).toEqual({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Itinerar",
+      alternateName: "itinerar.com.br",
+      url: "https://itinerar.com.br/",
+    });
+  });
+});
 
 const params = (lang: "pt-br" | "en") => Promise.resolve({ lang });
 
