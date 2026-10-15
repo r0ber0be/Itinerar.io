@@ -31,7 +31,6 @@ export default function LanguageSwitcher() {
               href={redirectedPathName(locale)}
               hrefLang={locale}
               lang={locale}
-              aria-label={localeName}
               aria-current={isCurrent ? "page" : undefined}
               className={
                 (isCurrent
@@ -41,6 +40,7 @@ export default function LanguageSwitcher() {
               }
             >
               {localeLabel}
+              <span className="sr-only"> ({localeName})</span>
             </Link>
 
             {index < i18n.locales.length - 1 && (
