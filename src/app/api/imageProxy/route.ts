@@ -8,6 +8,10 @@ export async function GET(request: Request) {
     return new NextResponse('O nome da foto é obrigatório', { status: 400 });
   }
 
+  if (!/^places\/[A-Za-z0-9_-]+\/photos\/[A-Za-z0-9_-]+$/.test(photoName)) {
+    return new NextResponse('Nome da foto inválido', { status: 400 });
+  }
+
   const API_KEY = process.env.ITINERARIO_KEY_MAPS;
   if (!API_KEY) {
     return new NextResponse('Há um problema na configuração do servidor', { status: 500 });
