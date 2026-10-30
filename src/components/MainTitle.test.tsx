@@ -1,17 +1,23 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen } from "@testing-library/react";
+import { usePathname } from "next/navigation";
 import ptBr from "@/dictionaries/pt-br.json";
+import en from "@/dictionaries/en.json";
 import { TranslationProvider } from "./providers/TranslationProvider";
 import MainTitle from "./MainTitle";
+
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(),
+}));
 
 function mockReducedMotion(reduce: boolean) {
   vi.stubGlobal("matchMedia", vi.fn().mockReturnValue({ matches: reduce }));
 }
 
-function renderTitle() {
+function renderTitle(dictionary = ptBr) {
   render(
-    <TranslationProvider dictionary={ptBr}>
+    <TranslationProvider dictionary={dictionary}>
       <MainTitle />
     </TranslationProvider>,
   );
@@ -30,6 +36,7 @@ async function advance(ms: number, steps = 1) {
 
 beforeEach(() => {
   vi.useFakeTimers();
+  vi.mocked(usePathname).mockReturnValue("/pt-br");
 });
 
 afterEach(() => {
@@ -76,5 +83,24 @@ describe("MainTitle", () => {
 
     await advance(10_000);
     expect(typedWord(heading)).toBe("São Paulo");
+  });
+
+  it("stops on the last city after one pass through the list", async () => {
+    mockReducedMotion(false);
+    const heading = renderTitle();
+
+    // Cada passo dispara um só timer (digitar, apagar ou a pausa); 300 passos cobrem a lista inteira.
+    await advance(3000, 300);
+    expect(typedWord(heading)).toBe("Fortaleza");
+
+    await advance(3000, 30);
+    expect(typedWord(heading)).toBe("Fortaleza");
+  });
+
+  it("lists the cities in the page language", () => {
+    const heading = renderTitle(en);
+
+    expect(heading.querySelector(".sr-only")!.textContent).toContain("London");
+    expect(heading.textContent).toContain(en.mainTitle);
   });
 });

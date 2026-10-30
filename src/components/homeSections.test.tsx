@@ -4,10 +4,7 @@ import type { ReactElement } from "react";
 import ptBr from "@/dictionaries/pt-br.json";
 import { TranslationProvider, useTranslation } from "./providers/TranslationProvider";
 import Advertisement from "./Advertisement";
-import Benefits from "./Benefits";
 import Discover from "./Discover";
-import Hero from "./Hero";
-import HowItWorks from "./HowItWorks";
 import PinSVG from "./svg/pin";
 import StarSVG from "./svg/star";
 
@@ -16,32 +13,11 @@ function renderWithDictionary(element: ReactElement) {
 }
 
 describe("home sections", () => {
-  it("renders the hero copy", () => {
-    const html = renderWithDictionary(<Hero />);
-
-    expect(html).toContain(ptBr.hero.title);
-    expect(html).toContain(ptBr.hero.subtitle);
-  });
-
-  it("lists every benefit", () => {
-    const html = renderWithDictionary(<Benefits />);
-
-    expect(html).toContain(ptBr.benefits.title);
-    expect(html.match(/<li/g)).toHaveLength(ptBr.benefits.items.length);
-  });
-
   it("renders the discover paragraphs", () => {
     const html = renderWithDictionary(<Discover />);
 
     expect(html).toContain(ptBr.discover.title);
     expect(html).toContain(ptBr.discover.secondParagraph);
-  });
-
-  it("numbers the steps from one", () => {
-    const html = renderWithDictionary(<HowItWorks />);
-
-    expect(html).toContain(ptBr.howItWorks.steps[0].title);
-    expect(html).toMatch(/>1<\/div>[\s\S]*>2<\/div>[\s\S]*>3<\/div>/);
   });
 });
 

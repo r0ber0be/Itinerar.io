@@ -1,54 +1,36 @@
 {
   "mainTitle": "O que fazer em",
+  "mainTitleCities": [
+    "São Paulo",
+    "Paris",
+    "Recife",
+    "Londres",
+    "Buenos Aires",
+    "Gramado",
+    "Dubai",
+    "Istambul",
+    "Fortaleza"
+  ],
   "featuredRoutes": "Destinos em destaque",
   "searchPlaceholder": "Buscar cidade",
   "searchButton": "Buscar",
+  "searchingButton": "Buscando…",
   "itineraryFor": "Roteiro de viagem para",
-  "openGoogleMapsButton": "Abrir Rota no Google Maps",
-  "startPoint": "Ponto de Partida",
-  "endPoint": "Ponto Final",
+  "openGoogleMapsButton": "Abrir rota no Google Maps",
+  "startPoint": "Ponto de partida",
+  "endPoint": "Ponto final",
   "imageUnavailable": "Imagem não disponível",
+  "loadingItinerary": "Montando o roteiro…",
+  "cityTooLong": "O nome da cidade não pode ter mais de 60 caracteres.",
   "skipToContent": "Pular para o conteúdo",
   "opensInNewTab": "(abre em nova aba)",
   "rating": "Avaliação",
   "fromPreviousStop": "Desde o ponto anterior:",
-  "hero": {
-    "title": "Planeje sua viagem perfeita",
-    "subtitle": "Descubra os melhores pontos turísticos e crie roteiros de viagem personalizados para qualquer destino do mundo."
-  },
-  "benefits": {
-    "title": "Por que usar o Itinerar?",
-    "items": [
-      "Roteiros personalizados baseados nos melhores pontos turísticos",
-      "Informações atualizadas sobre os locais, incluindo avaliações e fotos",
-      "Rotas otimizadas para aproveitar melhor seu tempo",
-      "100% gratuito e fácil de usar"
-    ]
-  },
+  "lead": "Descubra os melhores pontos turísticos e crie roteiros de viagem personalizados para qualquer destino do mundo.",
   "discover": {
-    "title": "Descubra o Mundo com o Itinerar",
+    "title": "Descubra o mundo com o Itinerar",
     "firstParagraph": " O Itinerar é seu companheiro de viagem para explorar cidades ao redor do mundo. Criamos roteiros personalizados com as atrações turísticas mais icônicas, joias escondidas e lugares imperdíveis em qualquer destino.",
     "secondParagraph": "Seja planejando uma viagem para Paris, explorando as ruas de Roma, ou relaxando nas praias de Jericoacoara, nossa plataforma ajuda você a aproveitar ao máximo sua experiência de viagem com rotas otimizadas e informações atualizadas."
-  },
-  "howItWorks": {
-    "title": "Como Funciona",
-    "steps": [
-      {
-        "id": 0,
-        "title": "Busque uma Cidade",
-        "description": "Digite o nome da cidade que você deseja visitar no campo de busca acima."
-      },
-      {
-        "id": 1,
-        "title": "Receba seu Roteiro",
-        "description": "Geramos instantaneamente um roteiro personalizado com os principais pontos turísticos e locais de interesse."
-      },
-      {
-        "id": 2,
-        "title": "Explore e Planeje",
-        "description": "Veja informações detalhadas sobre cada local, incluindo avaliações, endereços e fotos."
-      }
-    ]
   },
   "destinations": {
     "title": "Destinos Populares",

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import ptBr from "@/dictionaries/pt-br.json";
+import { TranslationProvider } from "@/components/providers/TranslationProvider";
 import AboutPage, { generateMetadata as aboutMetadata } from "./about/page";
 import PrivacyPolicy, { generateMetadata as privacyMetadata } from "./privacy/page";
 import Loading from "./[city]/loading";
@@ -21,11 +24,13 @@ describe.each([
 });
 
 describe("city loading", () => {
-  it("announces the loading state politely to screen readers", () => {
-    const html = renderToStaticMarkup(Loading());
+  it("announces the loading state politely to screen readers, in the page language", () => {
+    const html = renderToStaticMarkup(
+      createElement(TranslationProvider, { dictionary: ptBr, children: createElement(Loading) }),
+    );
 
-    expect(html).toContain('role="status"');
-    expect(html).toContain('aria-live="polite"');
+    expect(html).toContain(`role="status" aria-live="polite" class="text-muted mb-4">${ptBr.loadingItinerary}</p>`);
+    expect(html).toContain('<div aria-hidden="true"');
   });
 });
 

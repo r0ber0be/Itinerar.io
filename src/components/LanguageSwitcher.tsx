@@ -34,8 +34,8 @@ export default function LanguageSwitcher() {
               aria-current={isCurrent ? "page" : undefined}
               className={
                 (isCurrent
-                  ? "text-blue-700 font-bold dark:text-blue-400"
-                  : "text-gray-700 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-300 transition-colors")
+                  ? "text-accent font-bold"
+                  : "text-muted hover:text-accent transition-colors")
                 + " inline-flex items-center justify-center min-h-11 min-w-11 px-2"
               }
             >

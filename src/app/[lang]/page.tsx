@@ -1,8 +1,5 @@
-import Benefits from "@/components/Benefits";
 import Discover from "@/components/Discover";
-import Hero from "@/components/Hero";
 import HotTopics from "@/components/HotTopics";
-import HowItWorks from "@/components/HowItWorks";
 import { Locale } from "@/i18nConfig";
 import { Metadata } from "next";
 import { WebSite, WithContext } from "schema-dts";
@@ -84,13 +81,8 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }}
       />
-      <Hero />
-      {/* COMO FUNCIONA */}
-      <HowItWorks />
       {/* LOCAIS POPULARES */}
       <HotTopics lang={lang} />
-      {/* BENEFÍCIOS */}
-      <Benefits />
       {/* SEO */}
       <Discover />
     </>
