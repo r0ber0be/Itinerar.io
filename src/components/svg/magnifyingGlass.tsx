@@ -7,7 +7,7 @@ export default function MagnifyingGlassSVG() {
       fill="none" viewBox="0 0 24 24" 
       strokeWidth={1.5}
       stroke="currentColor" 
-      className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 size-6"
+      className="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-muted pointer-events-none"
     >
       <path
         strokeLinecap="round"

@@ -5,7 +5,7 @@ import MainTitle from "./MainTitle";
 export default function Header() {
   return (
     <header role="banner" className="grid w-full mt-2.5">
-      <div className="grid grid-cols-2 items-start">
+      <div className="grid grid-cols-2 items-center">
         <Logo />
         <nav aria-label="Idioma / Language" className="justify-self-end">
           <LanguageSwitcher />

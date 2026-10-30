@@ -87,7 +87,7 @@ describe("ResultsSection", () => {
 
     expect(within(items[0]).getByText("Resumo A")).toBeTruthy();
     expect(within(items[0]).getByText(`${ptBr.rating}:`)).toBeTruthy();
-    expect(items[0].textContent).toContain("4.7");
+    expect(items[0].textContent).toContain("4,7");
     expect(within(items[0]).getByRole("img", { name: "Place a" }).getAttribute("loading")).toBe("eager");
 
     expect(items[1].textContent).toContain(`${ptBr.fromPreviousStop} 5 min (1 km)`);

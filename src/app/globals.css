@@ -9,16 +9,27 @@
   --card-background-hover: #fefefe;
   --card-text-color: #000000;
   /* search*/
-  --search-background: #ececec;
+  --search-background: #ffffff;
+  --search-border: #6b7280;
+  --search-placeholder: #4b5563;
   /* button */
   --button-background: #1757a0;
   --button-background-hover: #2572b6;
   --button-text-color: #ffffff;
+  /* texto de destaque (cidades, idioma atual) */
+  --accent-text: #1757a0;
+  --muted-text: #4b5563;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--button-background);
+  --color-primary-hover: var(--button-background-hover);
+  --color-on-primary: var(--button-text-color);
+  --color-accent: var(--accent-text);
+  --color-muted: var(--muted-text);
+  --color-card: var(--card-background);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -35,21 +46,36 @@
     --card-text-color: #ffffff;
     /* search*/
     --search-background: #1a3a57;
+    --search-border: #8fa3b8;
+    --search-placeholder: #c3cfdb;
     /* button */
     --button-background: #1757a0;
     --button-background-hover: #2572b6;
     --button-text-color: #ffffff;
+    --accent-text: #7fb8f0;
+    --muted-text: #c3cfdb;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  caret-color: var(--accent-text);
+}
+
+::selection {
+  background: var(--button-background);
+  color: var(--button-text-color);
 }
 
 input {
   background: var(--search-background);
+}
+
+input::placeholder {
+  color: var(--search-placeholder);
+  opacity: 1;
 }
 
 button {

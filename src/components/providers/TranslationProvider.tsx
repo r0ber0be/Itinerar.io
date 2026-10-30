@@ -4,38 +4,27 @@ import { createContext, useContext } from 'react';
 
 type Dictionary = {
   mainTitle: string;
+  mainTitleCities: Array<string>;
   featuredRoutes: string;
   searchPlaceholder: string;
   searchButton: string;
+  searchingButton: string;
   itineraryFor: string;
   openGoogleMapsButton: string;
   startPoint: string;
   endPoint: string;
   imageUnavailable: string;
+  loadingItinerary: string;
+  cityTooLong: string;
   skipToContent: string;
   opensInNewTab: string;
   rating: string;
   fromPreviousStop: string;
-  hero: {
-    title: string;
-    subtitle: string;
-  };
-  benefits: {
-    title: string;
-    items: Array<string>;
-  },
+  lead: string;
   discover: {
     title: string;
     firstParagraph: string;
     secondParagraph: string;
-  },
-  howItWorks: {
-    title: string;
-    steps: Array<{
-      id: number;
-      title: string;
-      description: string;
-    }>,
   },
 };
 

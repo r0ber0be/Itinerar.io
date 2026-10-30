@@ -39,7 +39,7 @@ export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps>) 
   const lang = langProp ?? langFromParams ?? "pt-br";
   return (
     <>
-      <h2 className="text-2xl md:text-3xl font-bold mt-3.5 mb-3.5">
+      <h2 className="text-2xl md:text-3xl font-bold mt-12 mb-5">
         { dictionary.featuredRoutes }
       </h2>
 
@@ -48,14 +48,14 @@ export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps>) 
           <Link
             key={topic.city}
             href={`/${lang}/${encodeURIComponent(topic.city.toLowerCase())}`}
-            className="card rounded-2xl cursor-pointer overflow-hidden block transition-transform motion-safe:hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 dark:focus-visible:outline-blue-400"
+            className="group rounded-2xl overflow-hidden block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             prefetch={true}
           >
-            <div className="card rounded-2xl cursor-pointer overflow-hidden">
-              <div className="relative w-full h-48">
+            <div className="card h-full">
+              <div className="relative w-full h-48 overflow-hidden">
                 <Image 
                   src={topic.imageUrl}
-                  className="object-cover" 
+                  className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-105" 
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                   priority
@@ -63,7 +63,7 @@ export default function HotTopics({ lang: langProp }: Readonly<HotTopicsProps>) 
                   alt={topic.alt}
                 />
               </div>
-              <div className="px-6 py-3 text-xl md:text-2xl">{topic.city}</div>
+              <div className="px-5 py-4 text-xl md:text-2xl font-semibold">{topic.city}</div>
             </div>
           </Link>
         ))}

@@ -1,13 +1,14 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ptBr from "@/dictionaries/pt-br.json";
 import { TranslationProvider } from "./providers/TranslationProvider";
 import ItineraryGenerator from "./ItineraryGenerator";
 
 vi.mock("next/navigation", () => ({
   useRouter: vi.fn(),
+  usePathname: vi.fn(),
 }));
 
 const push = vi.fn();
@@ -15,6 +16,7 @@ const push = vi.fn();
 beforeEach(() => {
   push.mockReset();
   vi.mocked(useRouter).mockReturnValue({ push } as unknown as ReturnType<typeof useRouter>);
+  vi.mocked(usePathname).mockReturnValue("/pt-br");
 });
 
 afterEach(cleanup);
@@ -72,6 +74,20 @@ describe("ItineraryGenerator", () => {
     await search(input, "a".repeat(61));
 
     expect(push).not.toHaveBeenCalled();
-    expect(screen.getByRole("alert").textContent).toMatch(/60 caracteres/);
+    expect(screen.getByRole("alert").textContent).toBe(ptBr.cityTooLong);
+  });
+
+  it("keeps the searched city in the field on its page", () => {
+    vi.mocked(usePathname).mockReturnValue("/pt-br/rio-de-janeiro");
+
+    expect(renderGenerator().value).toBe("Rio De Janeiro");
+  });
+
+  it("keeps the typed city in the field after searching", async () => {
+    const input = renderGenerator();
+
+    await search(input, "Roma");
+
+    expect(input.value).toBe("Roma");
   });
 });

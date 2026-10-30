@@ -102,7 +102,7 @@ export default async function AboutPage({
         {content.lastUpdated}
       </p>
 
-      <div className="space-y-8">
+      <div className="space-y-8 max-w-[68ch]">
         {content.sections.map((section) => (
           <section key={section.id}>
             <h2 className="text-2xl font-semibold mb-3">
